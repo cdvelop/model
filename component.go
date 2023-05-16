@@ -5,8 +5,12 @@ type Component struct {
 	Name string
 	//ej: .mi-style{background:black;}
 	CSS string
+	JS
+}
+
+type JS struct {
 	// ej: MyFunction(e){console.log("hello ",e)};
-	FunctionsJS string
+	Functions string
 	// ej: btn.addEventListener('click', MyFunction);
-	ListenerJS string
+	Listeners string
 }
