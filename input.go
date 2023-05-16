@@ -1,10 +1,10 @@
 package model
 
 type Input struct {
-	Name string
+	Component
+
 	Build
 	Validate
-	ui
 }
 
 type Build interface {
