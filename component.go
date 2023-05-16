@@ -3,14 +3,14 @@ package model
 type Component struct {
 	//ej: search_footer,datalist,form
 	Name string
-	//Css Global ej: .mi-style{background:black;}
+	// CssG() string | Css Global ej: .mi-style{background:black;}
 	CssGlobal
-	//Css Privado
+	// CssP() string | Css Privado
 	CssPrivate
-	// Js Global
+	// JsG() string | Js Global
 	JsGlobal
-	// Js Privado
+	// JsP() string | Js Privado Modulo ej: MyFunction(e){console.log("hello ",e)};
 	JsPrivate
-	//Js Listeners
+	// JsL() string | ej: btn.addEventListener('click', MyFunction);
 	JsListeners
 }
