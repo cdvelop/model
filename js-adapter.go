@@ -1,8 +1,10 @@
 package model
 
 type JS interface {
-	// ej: MyFunction(e){console.log("hello ",e)};
-	Functions() string
+	//Js Global
+	JsGlobal() string
+	//Js Modulo ej: MyFunction(e){console.log("hello ",e)};
+	JsModule() string
 	// ej: btn.addEventListener('click', MyFunction);
-	Listeners() string
+	JsListeners() string
 }
