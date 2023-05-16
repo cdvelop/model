@@ -1,9 +1,9 @@
 package model
 
-type CssPublic interface {
-	CssPublic() string
+type CssGlobal interface {
+	CssG() string
 }
 
 type CssPrivate interface {
-	CssPrivate() string
+	CssP() string
 }
