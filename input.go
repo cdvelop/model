@@ -5,6 +5,8 @@ type Input struct {
 
 	Build
 	Validate
+
+	TestData
 }
 
 type Build interface {
@@ -13,4 +15,9 @@ type Build interface {
 
 type Validate interface {
 	DataField(data_in string, skip_validation bool) bool //como sera validado
+}
+
+type TestData interface {
+	Good(table_name, field_name string, random bool) (out []string)
+	WrongTestData() (out []string)
 }
