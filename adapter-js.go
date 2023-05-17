@@ -1,13 +1,13 @@
 package model
 
 type JsGlobal interface {
-	JsG() string
+	JsGlobal() string
 }
 
 type JsPrivate interface {
-	JsP() string
+	JsPrivate() string
 }
 
 type JsListeners interface {
-	JsL() string
+	JsListeners() string
 }

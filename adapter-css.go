@@ -1,9 +1,9 @@
 package model
 
 type CssGlobal interface {
-	CssG() string
+	CssGlobal() string
 }
 
 type CssPrivate interface {
-	CssP() string
+	CssPrivate() string
 }
