@@ -14,7 +14,7 @@ type Build interface {
 }
 
 type Validate interface {
-	DataField(data_in string, skip_validation bool) bool //como sera validado
+	ValidateField(data_in string, skip_validation bool) bool //como sera validado
 }
 
 type TestData interface {
