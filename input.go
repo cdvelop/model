@@ -10,7 +10,7 @@ type Input struct {
 }
 
 type Build interface {
-	HtmlTAG(id, field_name string, skip_completion_allowed bool) string //construir vista usuario input
+	HtmlTAG(id, field_name string, allow_skip_completed bool) string //construir vista usuario input
 }
 
 type Validate interface {

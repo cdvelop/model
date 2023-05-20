@@ -2,20 +2,11 @@ package model
 
 import "strings"
 
-func (o *Object) MainName() string {
+func (o Object) MainName() string {
 	return o.Name
 }
 
-func (o *Object) FilterField(nameRequired string) (fielsOut Field) {
-	for _, field := range o.Fields {
-		if nameRequired == field.Name {
-			return field
-		}
-	}
-	return
-}
-
-func (o *Object) GetRepresentativeTextField(data_element map[string]string) (values string) {
+func (o Object) GetRepresentativeTextField(data_element map[string]string) (values string) {
 	for _, keyNameModel := range o.TextFieldNames {
 		if valueFound, ok := data_element[keyNameModel]; ok {
 			values += valueFound + ` `
@@ -25,14 +16,23 @@ func (o *Object) GetRepresentativeTextField(data_element map[string]string) (val
 	return
 }
 
-func (o *Object) Columns() (columns []string) {
+func (o Object) Columns() (columns []string) {
 	for _, f := range o.Fields {
 		columns = append(columns, f.Name)
 	}
 	return
 }
 
-func (o *Object) FilterFields(namesRequired ...string) (fielsOut []Field) {
+func (o Object) FilterField(nameRequired string) (fielsOut Field) {
+	for _, field := range o.Fields {
+		if nameRequired == field.Name {
+			return field
+		}
+	}
+	return
+}
+
+func (o Object) FilterFields(namesRequired ...string) (fielsOut []Field) {
 	for _, field := range o.Fields {
 		for _, nameRq := range namesRequired {
 			if nameRq == field.Name {
@@ -44,7 +44,7 @@ func (o *Object) FilterFields(namesRequired ...string) (fielsOut []Field) {
 	return
 }
 
-func (o *Object) RenderFields() (fielsOut []Field) {
+func (o Object) RenderFields() (fielsOut []Field) {
 	for _, field := range o.Fields {
 		if field.NotRenderHtml {
 			fielsOut = append(fielsOut, field)
@@ -53,7 +53,7 @@ func (o *Object) RenderFields() (fielsOut []Field) {
 	return
 }
 
-func (o *Object) RequiredFields() (fielsOut []Field) {
+func (o Object) RequiredFields() (fielsOut []Field) {
 	for _, field := range o.Fields {
 		if !field.SkipCompletionAllowed {
 			fielsOut = append(fielsOut, field)
@@ -62,7 +62,7 @@ func (o *Object) RequiredFields() (fielsOut []Field) {
 	return
 }
 
-func (o *Object) GetFieldByName(nameRq string) (fielOut Field) {
+func (o Object) GetFieldByName(nameRq string) (fielOut Field) {
 	for _, field := range o.Fields {
 		if nameRq == field.Name {
 			return field
@@ -71,7 +71,7 @@ func (o *Object) GetFieldByName(nameRq string) (fielOut Field) {
 	return
 }
 
-func (o *Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) {
+func (o Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) {
 	removeNames := make(map[string]bool, len(namesToRemove))
 	for _, name := range namesToRemove {
 		removeNames[name] = false
@@ -85,15 +85,24 @@ func (o *Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) 
 	return
 }
 
-func (o *Object) PrimaryKeyName() string {
+func (o Object) PrimaryKeyName() string {
 	return "id_" + o.Name
 }
 
-func (o *Object) GetID(data_search map[string]string) string {
+func (o Object) GetID(data_search map[string]string) string {
 
 	if id, found := data_search[o.PrimaryKeyName()]; found {
 		return id
 	}
 
 	return "ERROR_NO_ID_" + o.Name
+}
+
+func (o Object) FieldExist(field_name string) (Field, bool) {
+	for _, field := range o.Fields {
+		if field.Name == field_name {
+			return field, true
+		}
+	}
+	return Field{}, false
 }
