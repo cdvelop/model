@@ -18,6 +18,6 @@ type Validate interface {
 }
 
 type TestData interface {
-	GoodTestData(table_name, field_name string, random bool) (out []string)
+	GoodTestData() (out []string)
 	WrongTestData() (out []string)
 }

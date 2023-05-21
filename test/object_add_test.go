@@ -11,7 +11,7 @@ func Test_Validate(t *testing.T) {
 			object := objects[data.Object]
 
 			message, ok := object.ValidateData(data.ValidALL, data.Data)
-			if ok != data.Result {
+			if ok != data.Expected {
 				t.Fatalf("%v %v", message, ok)
 			}
 

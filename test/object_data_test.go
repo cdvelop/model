@@ -7,7 +7,7 @@ var (
 		Object   string
 		Data     map[string]string
 		ValidALL bool //validar como nuevo (todo) o solo campos requeridos presentes
-		Result   bool //resultado esperado
+		Expected bool //resultado esperado
 	}{
 		"todos los campos correctos?": {TableName1,
 			kv{nameKey: "Luis", genderKey: "D", descriptionKey: "no tiene", rutKey: "73528171-2"},
