@@ -11,3 +11,10 @@ type Response struct {
 	Recipients       []string `json:"-"` // lista de ip, token o ids según app para el reenvió al finalizar solicitud
 	TargetArea       bool     `json:"-"` // si es falso el destino por defecto es publico de lo contrario sera para todos quines tengan la misma area del usuario solicitante
 }
+
+type CutResponse struct {
+	//Type,Object,Module,Message
+	//ej: ["create","user","ModuleUsers","ok"]
+	CutOptions []string  `json:"o"`
+	CutData    []CutData `json:"d"`
+}
