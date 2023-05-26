@@ -35,3 +35,38 @@ func (o Object) DataDecode(cut_data ...CutData) ([]map[string]string, error) {
 
 	return decodedData, nil
 }
+
+func (cr *CutResponse) CutResponseDecode(data []map[string]string) (out Response) {
+
+	if len(cr.CutOptions) > 0 && cr.CutOptions[0] != "" { //Type
+		out.Type = cr.CutOptions[0]
+
+	} else {
+		out.Type = "error"
+	}
+
+	if len(cr.CutOptions) > 1 && cr.CutOptions[1] != "" { // Object
+		// fmt.Println("si contiene objeto")
+		out.Object = cr.CutOptions[1]
+
+	} else {
+		out.Object = "error"
+	}
+
+	if len(cr.CutOptions) > 2 && cr.CutOptions[2] != "" { //Module
+		// fmt.Println("si contiene module")
+		out.Module = cr.CutOptions[2]
+	} else {
+		out.Module = out.Object
+	}
+
+	if len(cr.CutOptions) > 3 && cr.CutOptions[3] != "" { //Message
+		// fmt.Println("contiene mensaje")
+		out.Message = cr.CutOptions[3]
+	}
+
+	out.Data = data
+
+	return
+
+}
