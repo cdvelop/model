@@ -7,6 +7,8 @@ type Module struct {
 	Title string
 	// icono según sprite svg ej: "icon-camera"
 	Icon string
+
+	UserInterface
 	//areas soportadas por el modulo ej: 'a','t','x'
 	Areas []byte
 	// ui/components que usa el modulo ej: form,datalist,search....
