@@ -3,13 +3,13 @@ package model
 type Input struct {
 	Component
 
-	HtmlTag
+	Tag
 	Validate
 
 	TestData
 }
 
-type HtmlTag interface {
+type Tag interface {
 	HtmlTag(id, field_name string, allow_skip_completed bool) string
 }
 
