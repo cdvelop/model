@@ -1,38 +1,32 @@
 # Estructuras que utilizo con frecuencia en proyectos escritos en Go
 
 
-## ejemplo de uso en una tabla
+## ejemplo de uso en un objeto
 ```go
-func Patient() *model.Object {
-	run_Global := input.RunGlobal{
-		PlaceHolder: "ch ej: 13173472-7 dni ej: 12345678 ",
-	}
-	textOnly := input.TextOnly{}
-	phoneNumber := input.Number{Pattern: `^[0-9]{7,11}$`}
-
-	dateAge := input.DateAge{}
-
-	t := model.Object{
-		Noun:           "patient",
-		TextFieldNames: []string{"patient_name"},
+func MedicalHistory() model.Object {
+	return model.Object{
+		Name:           "medicalhistory",
+		TextFieldNames: []string{"service_name"},
 		Fields: []model.Field{
-			
-            {Name: "id_patient", DataType: "TEXT", Legend: "Id", Input: pkHiddenNoRequiredInView, NotRenderHtml: true},
-			
-            {Name: "patient_run", DataType: "TEXT", Unique: true, Legend: "Run o Dni", Input: run_Global},
-			
-            {Name: "patient_name", DataType: "TEXT", Legend: "Nombre y Apellido(s)", Input: textOnly},
-			
-            {Name: "patient_birthday", DataType: "TEXT", Legend: "Edad", Input: dateAge,},
-			
-            {Name: "patient_contact", DataType: "TEXT", Legend: "No Teléfono", Input: phoneNumber, SkipCompletionAllowed: true,Render: true},
-			
-            {Name: "patient_gender", DataType: "TEXT", Legend: "Genero", Input: radioGenero, SkipValidation: true},
-			
-            {Name: "patient_address", DataType: "TEXT", Legend: "Dirección", Input: textPointArea},
+			{Name: "id_medicalhistory", Legend: "id", Input: input.Pk()},
+			{Name: "id_patient", Legend: "paciente", Input: input.Pk()},
+
+			{Name: "staff_id", Legend: "Id", Input: input.Pk()},
+			{Name: "staff_name", Legend: "Atendido por", Input: input.Text()},
+			{Name: "staff_ocupation", Legend: "Especialidad", Input: input.Text()},
+			{Name: "staff_area", Legend: "Area", Input: input.Check(Area{})},
+
+			{Name: "service_id", Legend: "Prestación", Input: input.Pk()},
+
+			{Name: "day_attention", Legend: "Dia Atención", Input: input.Date()},
+			{Name: "hour_attention", Legend: "Hora", Input: input.Hour(`min="08:15"`, `max="20:15"`)},
+
+			{Name: "reason", Legend: "Motivo Consulta, Servicio o Procedimiento", Input: input.TextArea()},
+			{Name: "diagnostic", Legend: "Diagnostico (Descripción)", Input: input.TextArea()},
+			{Name: "prescription", Legend: "Prescripción (Conclusion)", Input: input.TextArea()},
+
+			{Name: "last_print_file", Legend: "Ultima Impresión en Archivo", Input: input.Text()},
 		},
 	}
-
-	return &t
 }
 ```
