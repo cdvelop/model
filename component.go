@@ -13,4 +13,15 @@ type Component struct {
 	JsPrivate
 	// JsListeners() string | ej: btn.addEventListener('click', MyFunction);
 	JsListeners
+
+	//ej: func (Component) FolderPath() string {
+	// _, filename, _, _ := runtime.Caller(0)
+	// dir := filepath.Dir(filename)
+	// return filepath.ToSlash(dir)
+	// }
+	Path
+}
+
+type Path interface {
+	FolderPath() string
 }
