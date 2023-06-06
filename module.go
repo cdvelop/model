@@ -5,9 +5,9 @@ type Module struct {
 	Name string
 	//Titulo que vera el usuario ej: "Modulo Fotografía"
 	Title string
-	// icono según sprite svg ej: "icon-camera"
-	Icon string
-
+	// icono para utilizar en sprite svg
+	Icon
+	//interfaz usuario modulo
 	UI
 	//areas soportadas por el modulo ej: 'a','t','x'
 	Areas []byte
@@ -15,4 +15,6 @@ type Module struct {
 	Components []Component
 	// objetos que contiene el modulo ej: patient,user
 	Objects []Object
+
+	Path
 }

@@ -21,7 +21,3 @@ type Component struct {
 	// }
 	Path
 }
-
-type Path interface {
-	FolderPath() string
-}
