@@ -2,7 +2,7 @@ package model
 
 type Theme interface {
 	// index.html ej in Root Folder Path with:
-	// {{.StyleSheet}} {{.AppName}} {{.AppVersion}} {{.Menu}}
+	// {{.StyleSheet}} {{.AppName}} {{.AppVersion}} {{.SpriteIcons}} {{.Menu}}
 	// {{.Message}} {{.UserName}} {{.UserArea}} {{.Modules}} {{.Script}}
 	FolderPath() string
 	// ModuleHtmlTemplate ej: nombre del modulo html y el contenido
