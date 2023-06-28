@@ -4,8 +4,8 @@ type JsGlobal interface {
 	JsGlobal() string
 }
 
-type JsPrivate interface {
-	JsPrivate() string
+type JsFunctions interface {
+	JsFunctions() string
 }
 
 type JsListeners interface {

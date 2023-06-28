@@ -3,6 +3,7 @@ package model
 import "strings"
 
 func (o Object) MainName() string {
+
 	return o.Name
 }
 
@@ -46,7 +47,7 @@ func (o Object) FilterFields(namesRequired ...string) (fielsOut []Field) {
 
 func (o Object) RenderFields() (fielsOut []Field) {
 	for _, field := range o.Fields {
-		if field.NotRenderHtml {
+		if !field.NotRenderHtml {
 			fielsOut = append(fielsOut, field)
 		}
 	}
@@ -105,4 +106,15 @@ func (o Object) FieldExist(field_name string) (Field, bool) {
 		}
 	}
 	return Field{}, false
+}
+
+func (o Object) ContainsModule(module_name string) bool {
+
+	for _, m := range o.Modules {
+		if m.MainName == module_name {
+			return true
+		}
+	}
+
+	return false
 }

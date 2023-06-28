@@ -1,5 +1,5 @@
 package model
 
 type UI interface {
-	UserInterface(area_access byte) string
+	UserInterface(options ...string) string
 }

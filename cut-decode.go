@@ -38,11 +38,11 @@ func (o Object) DataDecode(cut_data ...CutData) ([]map[string]string, error) {
 
 func (cr *CutResponse) CutResponseDecode(data []map[string]string) (out Response) {
 
-	if len(cr.CutOptions) > 0 && cr.CutOptions[0] != "" { //Type
-		out.Type = cr.CutOptions[0]
+	if len(cr.CutOptions) > 0 && cr.CutOptions[0] != "" { //Action
+		out.Action = cr.CutOptions[0]
 
 	} else {
-		out.Type = "error"
+		out.Action = "error"
 	}
 
 	if len(cr.CutOptions) > 1 && cr.CutOptions[1] != "" { // Object

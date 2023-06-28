@@ -1,7 +1,7 @@
 package model
 
 type Input struct {
-	Component
+	Object
 
 	Tag
 	Validate
@@ -10,6 +10,7 @@ type Input struct {
 }
 
 type Tag interface {
+	HtmlName() string
 	HtmlTag(id, field_name string, allow_skip_completed bool) string
 }
 

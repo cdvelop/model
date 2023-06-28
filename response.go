@@ -1,7 +1,7 @@
 package model
 
 type Response struct {
-	Type    string              `json:"t,omitempty"` //tipo solicitud respuesta: create, read, update, delete o error
+	Action  string              `json:"a,omitempty"` //acción a realizar con la solicitud: create, read, update, delete o error
 	Object  string              `json:"o,omitempty"` //nombre de la tabla u objeto controlador hacia donde va la solicitud
 	Module  string              `json:"m,omitempty"` //nombre del module controlador hacia donde va la solicitud
 	Message string              `json:"g,omitempty"` //mensaje para el usuario de la solicitud
@@ -13,7 +13,7 @@ type Response struct {
 }
 
 type CutResponse struct {
-	//Type,Object,Module,Message
+	//Action,Object,Module,Message
 	//ej: ["create","user","ModuleUsers","ok"]
 	CutOptions []string  `json:"o"`
 	CutData    []CutData `json:"d"`
