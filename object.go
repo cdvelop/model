@@ -6,7 +6,7 @@ type Object struct {
 	TextFieldNames []string //nombre de campos mas representativos del objeto o tabla ej: name, address, phone
 	Fields         []Field  //campos del objeto
 
-	Modules []*Module // módulos donde es usado el objeto
+	*Module // módulo origen del objeto
 	// Css() string ej: .mi-style{background:black;}
 	Css
 

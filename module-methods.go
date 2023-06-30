@@ -63,28 +63,8 @@ func (m *Module) AddObjects(objects ...*Object) {
 
 			if !obj_found {
 				m.Objects = append(m.Objects, new_obj)
-				new_obj.addModule(m)
-			}
-
-		}
-	}
-}
-
-func (o *Object) addModule(new_module *Module) {
-	if new_module != nil {
-
-		var module_found bool
-
-		for _, m := range o.Modules {
-			if m.MainName == new_module.MainName {
-				module_found = true
-				break
+				new_obj.Module = m
 			}
 		}
-
-		if !module_found {
-			o.Modules = append(o.Modules, new_module)
-		}
-
 	}
 }

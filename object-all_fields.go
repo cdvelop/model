@@ -4,12 +4,12 @@ import (
 	"strings"
 )
 
-func (o Object) verificationAllFields(data map[string]string) (wrongFields []string) {
+func (o Object) verificationAllFields(data *map[string]string) (wrongFields []string) {
 	for _, field := range o.Fields {
 
 		if !field.SkipCompletionAllowed { // campo requerido
 			// total_required++
-			if dataIn, exists := data[field.Name]; exists {
+			if dataIn, exists := (*data)[field.Name]; exists {
 
 				if !field.Input.ValidateField(dataIn, field.SkipValidation) {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
@@ -25,7 +25,7 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 			}
 
 		} else { //campo no requerido pero si no viene vació verificar solo si lo requiere
-			if dataIn, exists := data[field.Name]; exists && dataIn != "" {
+			if dataIn, exists := (*data)[field.Name]; exists && dataIn != "" {
 				// total_required++
 				if !field.Input.ValidateField(dataIn, field.SkipValidation) {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field))

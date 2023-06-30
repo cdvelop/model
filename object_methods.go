@@ -3,7 +3,6 @@ package model
 import "strings"
 
 func (o Object) MainName() string {
-
 	return o.Name
 }
 
@@ -24,9 +23,9 @@ func (o Object) Columns() (columns []string) {
 	return
 }
 
-func (o Object) FilterField(nameRequired string) (fielsOut Field) {
+func (o Object) GetFieldByName(nameRq string) (fielOut Field) {
 	for _, field := range o.Fields {
-		if nameRequired == field.Name {
+		if nameRq == field.Name {
 			return field
 		}
 	}
@@ -58,15 +57,6 @@ func (o Object) RequiredFields() (fielsOut []Field) {
 	for _, field := range o.Fields {
 		if !field.SkipCompletionAllowed {
 			fielsOut = append(fielsOut, field)
-		}
-	}
-	return
-}
-
-func (o Object) GetFieldByName(nameRq string) (fielOut Field) {
-	for _, field := range o.Fields {
-		if nameRq == field.Name {
-			return field
 		}
 	}
 	return
@@ -108,12 +98,10 @@ func (o Object) FieldExist(field_name string) (Field, bool) {
 	return Field{}, false
 }
 
-func (o Object) ContainsModule(module_name string) bool {
+func (o Object) IsExternalComponent() bool {
 
-	for _, m := range o.Modules {
-		if m.MainName == module_name {
-			return true
-		}
+	if o.Path != nil && o.Path.FolderPath() != "" {
+		return true
 	}
 
 	return false

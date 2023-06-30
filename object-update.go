@@ -1,8 +1,8 @@
 package model
 
-func (o Object) verificationUpdateFields(data map[string]string) (wrongFields []string) {
+func (o Object) verificationUpdateFields(data *map[string]string) (wrongFields []string) {
 
-	for field_name, value := range data {
+	for field_name, value := range *data {
 
 		if field_found, exist := o.FieldExist(field_name); exist { // existe
 

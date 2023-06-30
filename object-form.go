@@ -7,31 +7,27 @@ import (
 
 func (o *Object) BuildHtmlForm() string {
 
-	for _, m := range o.Modules {
+	if o.Module != nil && o.Module.Theme != nil && len(o.Fields) != 0 && strings.Contains(o.Module.MainName, o.Name) {
+		var input_tags string
 
-		if m != nil && m.Theme != nil && strings.Contains(m.MainName, o.Name) {
-			var input_tags string
+		for index, f := range o.RenderFields() {
 
-			for index, f := range o.RenderFields() {
+			id := o.Module.InputIdTemplate(o.Name, f.Name, strconv.Itoa(index))
 
-				id := m.InputIdTemplate(o.Name, f.Name, strconv.Itoa(index))
+			tag := f.Input.HtmlTag(id, f.Name, f.SkipCompletionAllowed)
 
-				tag := f.Input.HtmlTag(id, f.Name, f.SkipCompletionAllowed)
+			if f.Input.Name != "hidden" {
 
-				if f.Input.Name != "hidden" {
+				input_tags += o.Module.InputTemplate(o.Name, f.Name, f.Legend, f.Input.HtmlName(), tag, index) + "\n"
 
-					input_tags += m.InputTemplate(o.Name, f.Name, f.Legend, f.Input.HtmlName(), tag, index) + "\n"
+			} else {
 
-				} else {
-
-					input_tags += tag
-				}
-
+				input_tags += tag
 			}
 
-			return m.FormTemplate(o.Name, input_tags)
 		}
 
+		return o.Module.FormTemplate(o.Name, input_tags)
 	}
 
 	return ""
@@ -39,19 +35,16 @@ func (o *Object) BuildHtmlForm() string {
 
 func (o *Object) BuildJSInputFormModule() string {
 
-	for _, m := range o.Modules {
+	if o.Module != nil && o.Module.Theme != nil && len(o.Fields) != 0 {
 
-		if m != nil && m.Theme != nil && strings.Contains(m.MainName, o.Name) {
+		out_vars := o.Module.JsFormVariablesTemplate(o.Name)
 
-			out_vars := m.JsFormVariablesTemplate(o.Name)
-
-			for _, f := range o.RenderFields() {
-				out_vars += m.JsInputVariableTemplate(f.Name, f.Input.HtmlName())
-			}
-
-			return out_vars
-
+		for _, f := range o.RenderFields() {
+			out_vars += o.Module.JsInputVariableTemplate(f.Name, f.Input.HtmlName())
 		}
+
+		return out_vars
+
 	}
 
 	return ""

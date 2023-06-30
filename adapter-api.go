@@ -8,23 +8,35 @@ type ApiHandler struct {
 	Name string
 
 	CreateApi
-	ReadApi
+
+	ReadFileApi
+	ReadOneApi
+	ReadAllApi
+
 	UpdateApi
 	DeleteApi
 }
 
 type CreateApi interface {
-	Create(data *[]map[string]string) error
+	Create(params *[]map[string]string) error
 }
 
-type ReadApi interface {
-	Read(data *[]map[string]string) error
+type ReadFileApi interface {
+	ReadFile(params *map[string]string) (file_path string, err error)
+}
+
+type ReadOneApi interface {
+	ReadOne(params *map[string]string) (*map[string]string, error)
+}
+
+type ReadAllApi interface {
+	ReadAll(params *map[string]string) (*[]map[string]string, error)
 }
 
 type UpdateApi interface {
-	Update(data *[]map[string]string) error
+	Update(params *[]map[string]string) error
 }
 
 type DeleteApi interface {
-	Delete(data *[]map[string]string) error
+	Delete(params *[]map[string]string) error
 }
