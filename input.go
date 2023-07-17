@@ -1,7 +1,7 @@
 package model
 
 type Input struct {
-	Object
+	Name string
 
 	Tag
 	Validate
@@ -22,3 +22,5 @@ type TestData interface {
 	GoodTestData() (out []string)
 	WrongTestData() (out []string)
 }
+
+const INPUT_PATTERN = `Input: input\.(\w+)\(\)`

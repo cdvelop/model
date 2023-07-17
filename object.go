@@ -1,25 +1,19 @@
 package model
 
 type Object struct {
-	ApiHandler
+	// nombre del componente u objeto ej: client, search_footer,datalist,form
+	Name string
 
 	TextFieldNames []string //nombre de campos mas representativos del objeto o tabla ej: name, address, phone
 	Fields         []Field  //campos del objeto
 
 	*Module // módulo origen del objeto
-	// Css() string ej: .mi-style{background:black;}
-	Css
 
-	JsGlobal
-	// JsFunctions() string | ej: MyFunction(e){console.log("hello ",e)};
-	JsFunctions
-	// JsListeners() string | ej: btn.addEventListener('click', MyFunction);
-	JsListeners
+	BackendRequest
 
-	// FolderPath() string ej: func (Object) FolderPath() string {
-	// _, filename, _, _ := runtime.Caller(0)
-	// dir := filepath.Dir(filename)
-	// return filepath.ToSlash(dir)
-	// }
-	Path
+	FrontendResponse
+}
+
+func (o Object) MainName() string {
+	return o.Name
 }

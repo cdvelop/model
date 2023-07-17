@@ -12,7 +12,7 @@ func (o Object) DataEncode(data map[string]string) CutData {
 		if value, exist := data[f.Name]; exist && value != "" {
 
 			cut_data.Data = append(cut_data.Data, value)
-			// indice del campo + posición en el array de data
+			// indice del campo original + posición en el array de envió de la data
 			cut_data.Index[uint8(field_index)] = uint8(len(cut_data.Data) - 1)
 		} else {
 			// eliminamos el campo del objeto original

@@ -7,7 +7,7 @@ import (
 
 func (o *Object) BuildHtmlForm() string {
 
-	if o.Module != nil && o.Module.Theme != nil && len(o.Fields) != 0 && strings.Contains(o.Module.MainName, o.Name) {
+	if o.Module != nil && o.Module.Theme != nil && len(o.Fields) != 0 && strings.Contains(o.Module.Name, o.Name) {
 		var input_tags string
 
 		for index, f := range o.RenderFields() {
@@ -35,7 +35,7 @@ func (o *Object) BuildHtmlForm() string {
 
 func (o *Object) BuildJSInputFormModule() string {
 
-	if o.Module != nil && o.Module.Theme != nil && len(o.Fields) != 0 {
+	if o.Module.Theme != nil && len(o.Fields) != 0 {
 
 		out_vars := o.Module.JsFormVariablesTemplate(o.Name)
 

@@ -2,8 +2,21 @@ package model
 
 import "strings"
 
-func (o Object) MainName() string {
-	return o.Name
+func (o *Object) AddModule(m *Module) {
+	if m != nil {
+		// change to unique api name
+		o.apiName = m.Name + "." + o.Name
+		o.Module = m
+		m.Objects = append(m.Objects, o)
+	}
+}
+
+func (o Object) Api() string {
+	return o.apiName
+}
+
+func (o Object) ModuleName() string {
+	return o.Module.Name
 }
 
 func (o Object) GetRepresentativeTextField(data_element map[string]string) (values string) {
@@ -96,13 +109,4 @@ func (o Object) FieldExist(field_name string) (Field, bool) {
 		}
 	}
 	return Field{}, false
-}
-
-func (o Object) IsExternalComponent() bool {
-
-	if o.Path != nil && o.Path.FolderPath() != "" {
-		return true
-	}
-
-	return false
 }
