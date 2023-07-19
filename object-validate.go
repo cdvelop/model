@@ -59,7 +59,7 @@ func (o Object) verificationAllFields(data *map[string]string) (wrongFields []st
 			// total_required++
 			if dataIn, exists := (*data)[field.Name]; exists {
 
-				if !field.Input.ValidateField(dataIn, field.SkipValidation) {
+				if !field.Input.ValidateField(dataIn, field.SkipCompletionAllowed) {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
 				}
 
@@ -75,7 +75,7 @@ func (o Object) verificationAllFields(data *map[string]string) (wrongFields []st
 		} else { //campo no requerido pero si no viene vació verificar solo si lo requiere
 			if dataIn, exists := (*data)[field.Name]; exists && dataIn != "" {
 				// total_required++
-				if !field.Input.ValidateField(dataIn, field.SkipValidation) {
+				if !field.Input.ValidateField(dataIn, field.SkipCompletionAllowed) {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
 				}
 			}
@@ -91,17 +91,17 @@ func (o Object) verificationUpdateFields(data *map[string]string) (wrongFields [
 
 		if field_found, exist := o.FieldExist(field_name); exist { // existe
 
-			if !field_found.Inalterable {
+			if !field_found.Unique {
 
 				if !field_found.SkipCompletionAllowed || value != "" { // si es campo requerido se valida o distinto de vació
 
-					if !field_found.Input.ValidateField(value, field_found.SkipValidation) {
+					if !field_found.Input.ValidateField(value, field_found.SkipCompletionAllowed) {
 						wrongFields = append(wrongFields, "dato: "+value+" en: "+field_found.Legend)
 					}
 				}
 
 			} else {
-				wrongFields = append(wrongFields, field_found.Legend+" no se puede modificar")
+				wrongFields = append(wrongFields, field_found.Legend+" es un campo único no se puede modificar")
 			}
 
 		} else {
