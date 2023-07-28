@@ -6,14 +6,14 @@ import (
 )
 
 // validar data objeto
-func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...*map[string]string) error {
+func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map[string]string) error {
 
 	for _, data := range all_data {
 
 		var wrongFields []string
 
 		//verificar si campos pertenecen a la tabla
-		for field_name := range *data {
+		for field_name := range data {
 			if _, exist := o.FieldExist(field_name); !exist {
 				wrongFields = append(wrongFields, fmt.Sprintf("%v no pertenece a la tabla %v", field_name, o.Name))
 			}
@@ -29,7 +29,7 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...*ma
 			if its_update_or_delete {
 				// si no tiene su llave primaria valida..???
 
-				pk_value, exist := (*data)[o.PrimaryKeyName()]
+				pk_value, exist := data[o.PrimaryKeyName()]
 				if !exist {
 					return fmt.Errorf("llave Primaria inexistente")
 				}
@@ -52,12 +52,12 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...*ma
 	return nil
 }
 
-func (o Object) verificationAllFields(data *map[string]string) (wrongFields []string) {
+func (o Object) verificationAllFields(data map[string]string) (wrongFields []string) {
 	for _, field := range o.Fields {
 
 		if !field.SkipCompletionAllowed { // campo requerido
 			// total_required++
-			if dataIn, exists := (*data)[field.Name]; exists {
+			if dataIn, exists := data[field.Name]; exists {
 
 				if !field.Input.ValidateField(dataIn, field.SkipCompletionAllowed) {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
@@ -73,7 +73,7 @@ func (o Object) verificationAllFields(data *map[string]string) (wrongFields []st
 			}
 
 		} else { //campo no requerido pero si no viene vació verificar solo si lo requiere
-			if dataIn, exists := (*data)[field.Name]; exists && dataIn != "" {
+			if dataIn, exists := data[field.Name]; exists && dataIn != "" {
 				// total_required++
 				if !field.Input.ValidateField(dataIn, field.SkipCompletionAllowed) {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
@@ -85,9 +85,9 @@ func (o Object) verificationAllFields(data *map[string]string) (wrongFields []st
 	return
 }
 
-func (o Object) verificationUpdateFields(data *map[string]string) (wrongFields []string) {
+func (o Object) verificationUpdateFields(data map[string]string) (wrongFields []string) {
 
-	for field_name, value := range *data {
+	for field_name, value := range data {
 
 		if field_found, exist := o.FieldExist(field_name); exist { // existe
 
@@ -101,6 +101,10 @@ func (o Object) verificationUpdateFields(data *map[string]string) (wrongFields [
 				}
 
 			} else {
+				if field_found.Legend == "" {
+					field_found.Legend = field_found.Name
+				}
+
 				wrongFields = append(wrongFields, field_found.Legend+" es un campo único no se puede modificar")
 			}
 

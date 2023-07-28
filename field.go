@@ -15,3 +15,12 @@ type Field struct {
 	NotRequiredInDB bool // campo no requerido en base de datos al crear tabla
 	Encrypted       bool // si estará encriptado su almacenamiento o no
 }
+
+func (f Field) IsPrimaryKey(o *Object) bool {
+	if o != nil {
+		if o.PrimaryKeyName() == f.Name {
+			return true
+		}
+	}
+	return false
+}

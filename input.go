@@ -1,7 +1,7 @@
 package model
 
 type Input struct {
-	Name string
+	InputName string
 
 	Tag
 	Validate

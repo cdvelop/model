@@ -7,7 +7,7 @@ import (
 
 func (o *Object) BuildHtmlForm() string {
 
-	if o.Module != nil && o.Module.Theme != nil && len(o.Fields) != 0 && strings.Contains(o.Module.Name, o.Name) {
+	if o.Module != nil && o.Module.Theme != nil && len(o.Fields) != 0 && strings.Contains(o.Module.ModuleName, o.Name) {
 		var input_tags string
 
 		for index, f := range o.RenderFields() {
@@ -16,7 +16,7 @@ func (o *Object) BuildHtmlForm() string {
 
 			tag := f.Input.HtmlTag(id, f.Name, f.SkipCompletionAllowed)
 
-			if f.Input.Name != "hidden" {
+			if f.Input.InputName != "hidden" {
 
 				input_tags += o.Module.InputTemplate(o.Name, f.Name, f.Legend, f.Input.HtmlName(), tag, index) + "\n"
 

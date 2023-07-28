@@ -22,14 +22,14 @@ func (m Module) ContainsTypeAreas() (public, private bool) {
 
 func (m Module) BuildHtmlModule(options ...string) (out string) {
 	if m.Theme != nil && m.UI != nil {
-		return m.ModuleHtmlTemplate(m.Name, m.UI.UserInterface(options...))
+		return m.ModuleHtmlTemplate(m.ModuleName, m.UI.UserInterface(options...))
 	}
 	return
 }
 
 func (m Module) BuildMenuButton(index int) (out string) {
 	if m.Theme != nil {
-		return m.MenuButtonTemplate(m.Name, strconv.Itoa(index), m.IconID, m.Title)
+		return m.MenuButtonTemplate(m.ModuleName, strconv.Itoa(index), m.IconID, m.Title)
 	}
 	return
 }

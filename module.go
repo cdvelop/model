@@ -3,7 +3,7 @@ package model
 type Module struct {
 	Theme
 	//nombre modulo ej: chat,patient,user
-	Name string
+	ModuleName string
 	//Titulo que vera el usuario ej: "Modulo Fotografía"
 	Title string
 	// id icono para utilizar en sprite svg ej: icon-info
@@ -16,10 +16,10 @@ type Module struct {
 	Objects []*Object
 }
 
-func (m Module) MainName() string {
-	return m.Name
-}
+// func (m Module) MainName() string {
+// 	return m.ModuleName
+// }
 
-func (m Module) Components() []*Object {
-	return m.Objects
-}
+// func (m Module) Components() []*Object {
+// 	return m.Objects
+// }

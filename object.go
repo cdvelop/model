@@ -17,3 +17,13 @@ type Object struct {
 func (o Object) MainName() string {
 	return o.Name
 }
+
+func (o *Object) Response(action, message string, data ...map[string]string) *Response {
+
+	return &Response{
+		Action:  action,
+		Object:  o.Name,
+		Message: message,
+		Data:    data,
+	}
+}

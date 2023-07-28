@@ -5,7 +5,7 @@ import "strings"
 func (o *Object) AddModule(m *Module) {
 	if m != nil {
 		// change to unique api name
-		o.apiName = m.Name + "." + o.Name
+		o.apiName = m.ModuleName + "." + o.Name
 		o.Module = m
 		m.Objects = append(m.Objects, o)
 	}
@@ -16,7 +16,7 @@ func (o Object) Api() string {
 }
 
 func (o Object) ModuleName() string {
-	return o.Module.Name
+	return o.Module.ModuleName
 }
 
 func (o Object) GetRepresentativeTextField(data_element map[string]string) (values string) {

@@ -1,8 +1,10 @@
 package model
 
-type DataBase interface {
-	CreateObjects(table_name string, all_data ...map[string]string) error
-	ReadDbData(params map[string]string) ([]map[string]string, error)
-	UpdateObjects(table_name string, all_data ...map[string]string) error
-	DeleteObjects(table_name string, all_data ...map[string]string) error
+type DataBaseAdapter interface {
+	CreateObjectsInDB(table_name string, data ...map[string]string) error
+	ReadObjectsInDB(table_name string, data ...map[string]string) ([]map[string]string, error)
+	UpdateObjectsInDB(table_name string, data ...map[string]string) ([]map[string]string, error)
+	DeleteObjectsInDB(table_name string, data ...map[string]string) ([]map[string]string, error)
+
+	CreateTablesInDB(...*Object) error
 }

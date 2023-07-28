@@ -53,16 +53,9 @@ func (cr *CutResponse) CutResponseDecode(data []map[string]string) (out Response
 		out.Object = "error"
 	}
 
-	if len(cr.CutOptions) > 2 && cr.CutOptions[2] != "" { //Module
-		// fmt.Println("si contiene module")
-		out.Module = cr.CutOptions[2]
-	} else {
-		out.Module = out.Object
-	}
-
-	if len(cr.CutOptions) > 3 && cr.CutOptions[3] != "" { //Message
+	if len(cr.CutOptions) > 2 && cr.CutOptions[2] != "" { //Message
 		// fmt.Println("contiene mensaje")
-		out.Message = cr.CutOptions[3]
+		out.Message = cr.CutOptions[2]
 	}
 
 	out.Data = data
