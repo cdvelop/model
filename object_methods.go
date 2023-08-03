@@ -2,13 +2,38 @@ package model
 
 import "strings"
 
-func (o *Object) AddModule(m *Module) {
+func (o *Object) AddModule(m *Module, api_name ...string) {
 	if m != nil {
+		var (
+			endpoint    string
+			middle_name string
+		)
+
+		for i, v := range api_name {
+
+			if v != o.Name {
+				if i == 0 {
+					endpoint = "." + v
+				} else {
+					endpoint += "." + v
+				}
+			}
+
+		}
+
+		if m.ModuleName != o.Name {
+			middle_name = "." + o.Name
+		}
+
 		// change to unique api name
-		o.apiName = m.ModuleName + "." + o.Name
-		o.Module = m
+		o.apiName = m.ModuleName + middle_name + endpoint
+		o.module = m
 		m.Objects = append(m.Objects, o)
 	}
+}
+
+func (o Object) Module() *Module {
+	return o.module
 }
 
 func (o Object) Api() string {
@@ -16,7 +41,7 @@ func (o Object) Api() string {
 }
 
 func (o Object) ModuleName() string {
-	return o.Module.ModuleName
+	return o.module.ModuleName
 }
 
 func (o Object) GetRepresentativeTextField(data_element map[string]string) (values string) {

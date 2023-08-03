@@ -7,7 +7,7 @@ type Object struct {
 	TextFieldNames []string //nombre de campos mas representativos del objeto o tabla ej: name, address, phone
 	Fields         []Field  //campos del objeto
 
-	*Module // módulo origen del objeto
+	module *Module // módulo origen del objeto
 
 	BackendRequest
 
@@ -18,9 +18,9 @@ func (o Object) MainName() string {
 	return o.Name
 }
 
-func (o *Object) Response(action, message string, data ...map[string]string) *Response {
+func (o *Object) Response(action, message string, data ...map[string]string) Response {
 
-	return &Response{
+	return Response{
 		Action:  action,
 		Object:  o.Name,
 		Message: message,

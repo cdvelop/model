@@ -23,7 +23,7 @@ type CutData struct {
 	// 	},}
 	// ej data normal con todos los campos: {"name":"John Doe","email":"johndoe@example.com","phone":"555"}
 	// version recortada Data: {"John Doe","johndoe@example.com","555"}
-	// Index al codificar = {"0:0","1:1","2:2"}
+	// Index Objeto al codificar = {"0:0","1:1","2:2"}
 	// ej no mail: {"marcel", "777"}
 	// Index al codificar = {"0:0","1:2"}
 	Index map[uint8]uint8 `json:"i"`

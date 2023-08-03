@@ -34,6 +34,6 @@ type DeleteApi interface {
 
 type FileApi interface {
 	MaximumFileSize() int64
-	UploadFile(r *http.Request, params map[string]string) ([]map[string]string, error)
+	CreateFile(r *http.Request, params map[string]string) ([]map[string]string, error)
 	FilePath(params map[string]string) (file_path string, err error)
 }
