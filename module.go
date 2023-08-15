@@ -1,7 +1,6 @@
 package model
 
 type Module struct {
-	Theme
 	//nombre modulo ej: chat,patient,user
 	ModuleName string
 	//Titulo que vera el usuario ej: "Modulo Fotografía"
@@ -15,11 +14,3 @@ type Module struct {
 	// objetos o componentes que contiene el modulo ej: patient,user,datalist,search....
 	Objects []*Object
 }
-
-// func (m Module) MainName() string {
-// 	return m.ModuleName
-// }
-
-// func (m Module) Components() []*Object {
-// 	return m.Objects
-// }
