@@ -1,7 +1,7 @@
 package model
 
 import (
-	"fmt"
+	"strconv"
 )
 
 func (o Object) DataDecode(cut_data ...CutData) ([]map[string]string, error) {
@@ -10,11 +10,12 @@ func (o Object) DataDecode(cut_data ...CutData) ([]map[string]string, error) {
 	for _, c := range cut_data {
 
 		if len(c.Index) != len(c.Data) {
-			return nil, fmt.Errorf("tamaño index %d en DataDecode es diferente a la data enviada: %d", len(c.Index), len(c.Data))
+			// return nil, fmt.Errorf("tamaño index %d en DataDecode es diferente a la data enviada: %d", len(c.Index), len(c.Data))
+			return nil, MyError{Message: "tamaño index " + strconv.Itoa(len(c.Index)) + " en DataDecode es diferente a la data enviada: " + strconv.Itoa(len(c.Data))}
 		}
 
 		if len(c.Index) > len(o.Fields) {
-			return nil, fmt.Errorf("tamaño index: %d en DataDecode es mayor al del modelo del objeto %v: %d", len(c.Index), o.Name, len(c.Data))
+			return nil, MyError{Message: "tamaño index: " + strconv.Itoa(len(c.Index)) + " en DataDecode es mayor al del modelo del objeto " + o.Name + ": " + strconv.Itoa(len(c.Data))}
 		}
 
 		data_decoded := make(map[string]string)

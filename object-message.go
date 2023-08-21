@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -18,7 +17,9 @@ func wrongMessage(wrongFields []string) error {
 
 	// fmt.Printf("WF %v\n", wrongFields)
 
-	return fmt.Errorf("%v. %v", defMessage, strings.TrimSpace(wf))
+	// return fmt.Errorf("%v. %v", defMessage, strings.TrimSpace(wf))
+
+	return MyError{Message: defMessage + ". " + strings.TrimSpace(wf)}
 }
 
 func errorMessage(dataIn string, f *Field) (out string) {

@@ -26,7 +26,7 @@ func (o *Object) AddModule(m *Module, api_name ...string) {
 		}
 
 		// change to unique api name
-		o.apiName = m.ModuleName + middle_name + endpoint
+		o.object_id = m.ModuleName + middle_name + endpoint
 		o.module = m
 		m.Objects = append(m.Objects, o)
 	}
@@ -36,8 +36,8 @@ func (o Object) Module() *Module {
 	return o.module
 }
 
-func (o Object) Api() string {
-	return o.apiName
+func (o Object) ID() string {
+	return o.object_id
 }
 
 func (o Object) ModuleName() string {

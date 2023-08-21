@@ -4,6 +4,8 @@ type Object struct {
 	// nombre del componente u objeto ej: client, search_footer,datalist,form
 	Name string
 
+	object_id string //ej staff.calendar,kdks9125=...
+
 	TextFieldNames []string //nombre de campos mas representativos del objeto o tabla ej: name, address, phone
 	Fields         []Field  //campos del objeto
 

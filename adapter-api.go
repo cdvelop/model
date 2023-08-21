@@ -6,8 +6,6 @@ type FrontendResponse struct {
 }
 
 type BackendRequest struct {
-	apiName string //ej staff.calendar,kdks9125=...
-
 	CreateApi
 	ReadApi
 	UpdateApi

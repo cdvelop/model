@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -15,7 +14,7 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 		//verificar si campos pertenecen a la tabla
 		for field_name := range data {
 			if _, exist := o.FieldExist(field_name); !exist {
-				wrongFields = append(wrongFields, fmt.Sprintf("%v no pertenece a la tabla %v", field_name, o.Name))
+				wrongFields = append(wrongFields, field_name+" no pertenece a la tabla "+o.Name)
 			}
 		}
 		if len(wrongFields) != 0 {
@@ -31,13 +30,13 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 
 				pk_value, exist := data[o.PrimaryKeyName()]
 				if !exist {
-					return fmt.Errorf("llave Primaria inexistente")
+					return MyError{Message: "llave Primaria inexistente"}
 				}
 
 				field := o.GetFieldByName(o.PrimaryKeyName())
 
 				if !field.Input.ValidateField(pk_value, false) {
-					return fmt.Errorf("llave Primaria invalida")
+					return MyError{Message: "llave Primaria invalida"}
 				}
 			}
 
