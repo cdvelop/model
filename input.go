@@ -15,7 +15,8 @@ type Tag interface {
 }
 
 type Validate interface {
-	ValidateField(data_in string, skip_validation bool) bool
+	//options html ej: data-option="ch_doc"
+	ValidateField(data_in string, skip_validation bool, options ...string) bool
 }
 
 type TestData interface {
@@ -23,4 +24,6 @@ type TestData interface {
 	WrongTestData() (out []string)
 }
 
-const INPUT_PATTERN = `Input: input\.(\w+)\(\)`
+// const INPUT_PATTERN = `Input: input\.(\w+)\(\)`
+
+const INPUT_PATTERN = `Input: input\.(\w+)\([^)]*\)`

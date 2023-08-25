@@ -19,7 +19,7 @@ func wrongMessage(wrongFields []string) error {
 
 	// return fmt.Errorf("%v. %v", defMessage, strings.TrimSpace(wf))
 
-	return MyError{Message: defMessage + ". " + strings.TrimSpace(wf)}
+	return Error(defMessage + ". " + strings.TrimSpace(wf))
 }
 
 func errorMessage(dataIn string, f *Field) (out string) {

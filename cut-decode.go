@@ -11,11 +11,11 @@ func (o Object) DataDecode(cut_data ...CutData) ([]map[string]string, error) {
 
 		if len(c.Index) != len(c.Data) {
 			// return nil, fmt.Errorf("tamaño index %d en DataDecode es diferente a la data enviada: %d", len(c.Index), len(c.Data))
-			return nil, MyError{Message: "tamaño index " + strconv.Itoa(len(c.Index)) + " en DataDecode es diferente a la data enviada: " + strconv.Itoa(len(c.Data))}
+			return nil, Error("tamaño index " + strconv.Itoa(len(c.Index)) + " en DataDecode es diferente a la data enviada: " + strconv.Itoa(len(c.Data)))
 		}
 
 		if len(c.Index) > len(o.Fields) {
-			return nil, MyError{Message: "tamaño index: " + strconv.Itoa(len(c.Index)) + " en DataDecode es mayor al del modelo del objeto " + o.Name + ": " + strconv.Itoa(len(c.Data))}
+			return nil, Error("tamaño index: " + strconv.Itoa(len(c.Index)) + " en DataDecode es mayor al del modelo del objeto " + o.Name + ": " + strconv.Itoa(len(c.Data)))
 		}
 
 		data_decoded := make(map[string]string)

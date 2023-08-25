@@ -1,9 +1,23 @@
 package model
 
-type MyError struct {
-	Message string
+type err struct {
+	message string
 }
 
-func (e MyError) Error() string {
-	return e.Message
+func Error(texts ...string) *err {
+
+	var message = "error "
+	for i, text := range texts {
+		if i == 0 {
+			message += text
+		} else {
+			message += " " + text
+		}
+	}
+
+	return &err{message: message}
+}
+
+func (e err) Error() string {
+	return e.message
 }
