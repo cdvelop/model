@@ -7,12 +7,9 @@ type Theme interface {
 	MenuButtonTemplate(module_name, index, icon_id, title string) string
 	MenuClassName() string // ej: .menu-container
 	MenuItemClass() string // ej: navbar-item
-	// FormTemplate(object_name, input_tags string) string
-	// InputTemplate(object_name, field_name, legend, html_name, input_tag string, index int) string
-	// InputIdTemplate(object_name, field_name, index string) string
-	JsFormVariablesTemplate(object_name string) string
-	JsInputVariableTemplate(field_name, html_name string) string
 
 	ModuleClassName() string //ej: slider_panel
 	ModuleTemplate(m *Module, form *Object) string
+
+	FunctionMessageName() string // ej: ShowMessageToUser
 }
