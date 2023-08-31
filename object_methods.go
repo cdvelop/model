@@ -61,13 +61,13 @@ func (o Object) Columns() (columns []string) {
 	return
 }
 
-func (o Object) GetFieldByName(nameRq string) (fielOut Field) {
+func (o Object) GetFieldByName(required_name string) (Field, error) {
 	for _, field := range o.Fields {
-		if nameRq == field.Name {
-			return field
+		if required_name == field.Name {
+			return field, nil
 		}
 	}
-	return
+	return Field{}, Error("campo:", required_name, "no encontrado")
 }
 
 func (o Object) FilterFields(namesRequired ...string) (fielsOut []Field) {
@@ -115,7 +115,7 @@ func (o Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) {
 }
 
 func (o Object) PrimaryKeyName() string {
-	return "id_" + o.Name
+	return PREFIX_ID_NAME + o.Name
 }
 
 func (o Object) GetID(data_search map[string]string) string {

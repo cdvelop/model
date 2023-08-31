@@ -16,7 +16,7 @@ type Tag interface {
 
 type Validate interface {
 	//options html ej: data-option="ch_doc"
-	ValidateField(data_in string, skip_validation bool, options ...string) bool
+	ValidateField(data_in string, skip_validation bool, options ...string) error
 }
 
 type TestData interface {

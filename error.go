@@ -6,7 +6,7 @@ type err struct {
 
 func Error(texts ...string) *err {
 
-	var message = "error "
+	var message string
 	for i, text := range texts {
 		if i == 0 {
 			message += text

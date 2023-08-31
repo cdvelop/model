@@ -22,7 +22,11 @@ func wrongMessage(wrongFields []string) error {
 	return Error(defMessage + ". " + strings.TrimSpace(wf))
 }
 
-func errorMessage(dataIn string, f *Field) (out string) {
+func errorMessage(dataIn string, f *Field, err error) (out string) {
+
+	if err != nil {
+		out = err.Error()
+	}
 
 	var wrong_field string
 

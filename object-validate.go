@@ -33,11 +33,16 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 					return Error("llave Primaria inexistente")
 				}
 
-				field := o.GetFieldByName(o.PrimaryKeyName())
-
-				if !field.Input.ValidateField(pk_value, false) {
-					return Error("llave Primaria invalida")
+				field, err := o.GetFieldByName(o.PrimaryKeyName())
+				if err != nil {
+					return err
 				}
+
+				err = field.Input.ValidateField(pk_value, false)
+				if err != nil {
+					return Error("llave Primaria invalida", err.Error())
+				}
+
 			}
 
 			wrongFields = o.verificationUpdateFields(data)
@@ -58,8 +63,9 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 			// total_required++
 			if dataIn, exists := data[field.Name]; exists {
 
-				if !field.Input.ValidateField(dataIn, field.SkipCompletionAllowed) {
-					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
+				err := field.Input.ValidateField(dataIn, field.SkipCompletionAllowed)
+				if err != nil {
+					wrongFields = append(wrongFields, errorMessage(dataIn, &field, err))
 				}
 
 			} else {
@@ -67,15 +73,16 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 				// fmt.Printf("NO EXISTE %v DATO\n", field.Name)
 				if !strings.Contains(field.Name, "id_"+o.Name) {
 					// fmt.Printf("NO ES LLAVE PRIMARIA %v \n", table_name)
-					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
+					wrongFields = append(wrongFields, errorMessage(dataIn, &field, nil))
 				}
 			}
 
 		} else { //campo no requerido pero si no viene vació verificar solo si lo requiere
 			if dataIn, exists := data[field.Name]; exists && dataIn != "" {
 				// total_required++
-				if !field.Input.ValidateField(dataIn, field.SkipCompletionAllowed) {
-					wrongFields = append(wrongFields, errorMessage(dataIn, &field))
+				err := field.Input.ValidateField(dataIn, field.SkipCompletionAllowed)
+				if err != nil {
+					wrongFields = append(wrongFields, errorMessage(dataIn, &field, err))
 				}
 			}
 		}
@@ -94,8 +101,9 @@ func (o Object) verificationUpdateFields(data map[string]string) (wrongFields []
 
 				if !field_found.SkipCompletionAllowed || value != "" { // si es campo requerido se valida o distinto de vació
 
-					if !field_found.Input.ValidateField(value, field_found.SkipCompletionAllowed) {
-						wrongFields = append(wrongFields, "dato: "+value+" en: "+field_found.Legend)
+					err := field_found.Input.ValidateField(value, field_found.SkipCompletionAllowed)
+					if err != nil {
+						wrongFields = append(wrongFields, "dato: "+value+" en: "+field_found.Legend+" "+err.Error())
 					}
 				}
 
