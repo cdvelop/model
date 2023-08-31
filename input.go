@@ -3,6 +3,9 @@ package model
 type Input struct {
 	InputName string
 
+	Minimum int
+	Maximum int
+
 	Tag
 	Validate
 
