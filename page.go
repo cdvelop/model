@@ -2,7 +2,7 @@ package model
 
 // index.html ej:
 // {{.StyleSheet}} {{.AppName}} {{.AppVersion}} {{.SpriteIcons}} {{.Menu}}
-// {{.Message}} {{.UserName}} {{.UserArea}} {{.Modules}} {{.Script}}
+// {{.Message}} {{.UserName}} {{.UserArea}} {{.Modules}} {{.Script}} {{.Data}}
 type Page struct {
 	StyleSheet string // url ej style.css
 
@@ -20,4 +20,6 @@ type Page struct {
 	Modules string
 
 	Script string // ej main.js
+
+	DataBootActions string //index ej <meta name="DataBootActions" content="{{.DataBootActions}}">
 }

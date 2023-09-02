@@ -25,7 +25,7 @@ func wrongMessage(wrongFields []string) error {
 func errorMessage(dataIn string, f *Field, err error) (out string) {
 
 	if err != nil {
-		out = err.Error()
+		out = err.Error() + " "
 	}
 
 	var wrong_field string
@@ -37,9 +37,9 @@ func errorMessage(dataIn string, f *Field, err error) (out string) {
 	}
 
 	if dataIn == "" {
-		out = "[" + wrong_field + "] dato requerido"
+		out += "[" + wrong_field + "] dato requerido"
 	} else {
-		out = "dato: [" + dataIn + "] en: [" + wrong_field + "]"
+		out += "dato: [" + dataIn + "] en: [" + wrong_field + "]"
 	}
 
 	return

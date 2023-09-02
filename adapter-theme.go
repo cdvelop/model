@@ -9,7 +9,7 @@ type Theme interface {
 	MenuItemClass() string // ej: navbar-item
 
 	ModuleClassName() string //ej: slider_panel
-	ModuleTemplate(m *Module, form *Object) string
+	ModuleTemplate(m *Module, form *Object, options ...string) string
 
 	FunctionMessageName() string // ej: ShowMessageToUser
 }
