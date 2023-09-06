@@ -21,5 +21,5 @@ type Page struct {
 
 	Script string // ej main.js
 
-	DataBootActions string //index ej <meta name="DataBootActions" content="{{.DataBootActions}}">
+	JsonBootActions string //index ej <meta name="JsonBootActions" content="{{.JsonBootActions}}">
 }

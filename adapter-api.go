@@ -6,12 +6,18 @@ type FrontendResponse struct {
 }
 
 type BackendRequest struct {
+	BootResponse
+
 	CreateApi
 	ReadApi
 	UpdateApi
 	DeleteApi
 
 	FileApi
+}
+
+type BootResponse interface {
+	AddBootResponse(u *User) ([]Response, error)
 }
 
 type CreateApi interface {
