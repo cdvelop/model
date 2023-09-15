@@ -2,10 +2,7 @@ package model
 
 import "net/http"
 
-type FrontendResponse struct {
-}
-
-type BackendRequest struct {
+type BackendHandler struct {
 	BootResponse
 
 	CreateApi

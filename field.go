@@ -9,7 +9,7 @@ type Field struct {
 	Legend        string //como se mostrara al usuario el campo en el encabezado ej: "name" por "Nombre Usuario"
 	NotRenderHtml bool   // si no se necesita en formulario html
 
-	Input
+	*Input
 
 	SkipCompletionAllowed bool //se permite que el campo no este completado. por defecto siempre sera requerido
 
