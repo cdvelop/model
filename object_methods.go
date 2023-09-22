@@ -72,6 +72,7 @@ func (o Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) {
 	return
 }
 
+//ej: "id_client"
 func (o Object) PrimaryKeyName() string {
 	return PREFIX_ID_NAME + o.Name
 }

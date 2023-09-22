@@ -1,5 +1,7 @@
 package model
 
+const INPUT_PATTERN = `input\.(\w+)\([^)]*\)`
+
 type Input struct {
 	InputName string
 
@@ -26,7 +28,3 @@ type TestData interface {
 	GoodTestData() (out []string)
 	WrongTestData() (out []string)
 }
-
-// const INPUT_PATTERN = `Input: input\.(\w+)\(\)`
-
-const INPUT_PATTERN = `Input: input\.(\w+)\([^)]*\)`

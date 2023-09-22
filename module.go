@@ -23,4 +23,13 @@ type Module struct {
 	Areas []byte
 	// objetos o componentes que contiene el modulo ej: patient,user,datalist,search....
 	Objects []*Object
+
+	*ModuleHandlers
+}
+
+type ModuleHandlers struct {
+	Theme ThemeAdapter
+	DBA   DataBaseAdapter
+	Time  TimeAdapter
+	DOM   DomAdapter
 }
