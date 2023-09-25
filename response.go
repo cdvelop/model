@@ -26,7 +26,7 @@ type CutData struct {
 	// Index Objeto al codificar = {"0:0","1:1","2:2"}
 	// ej no mail: {"marcel", "777"}
 	// Index al codificar = {"0:0","1:2"}
-	Index map[uint8]uint8 `json:"i"`
+	Index map[int8]int8 `json:"i"`
 	//Data ej en mapa: "Data":[{"id":"222","name":"manzana","valor":"1200"}]
 	// ahora: "Data":["222","manzana","1200"]
 	Data []string `json:"d"`
