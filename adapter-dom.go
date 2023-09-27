@@ -1,3 +1,6 @@
 package model
 
-type DomAdapter interface{}
+type DomAdapter interface {
+	Log(message ...any)
+	UserMessage(text string, options ...string)
+}

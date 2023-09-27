@@ -71,7 +71,7 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 			} else {
 				// si no existe y es requerido y no es llave primaria  ni llave foránea
 				// fmt.Printf("NO EXISTE %v DATO\n", field.Name)
-				if !strings.Contains(field.Name, "id_"+o.Name) {
+				if !strings.Contains(field.Name, o.PrimaryKeyName()) {
 					// fmt.Printf("NO ES LLAVE PRIMARIA %v \n", table_name)
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field, nil))
 				}

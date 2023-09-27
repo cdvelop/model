@@ -18,23 +18,23 @@ type BootResponse interface {
 }
 
 type CreateApi interface {
-	Create(data ...map[string]string) error
+	Create(u *User, data ...map[string]string) error
 }
 
 type ReadApi interface {
-	Read(data ...map[string]string) ([]map[string]string, error)
+	Read(u *User, data ...map[string]string) ([]map[string]string, error)
 }
 
 type UpdateApi interface {
-	Update(data ...map[string]string) ([]map[string]string, error)
+	Update(u *User, data ...map[string]string) ([]map[string]string, error)
 }
 
 type DeleteApi interface {
-	Delete(data ...map[string]string) ([]map[string]string, error)
+	Delete(u *User, data ...map[string]string) ([]map[string]string, error)
 }
 
 type FileApi interface {
 	MaximumFileSize() int64
-	CreateFile(r *http.Request, params map[string]string) ([]map[string]string, error)
-	FilePath(params map[string]string) (file_path string, err error)
+	CreateFile(u *User, r *http.Request, params map[string]string) ([]map[string]string, error)
+	FilePath(u *User, params map[string]string) (file_path string, err error)
 }

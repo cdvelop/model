@@ -28,8 +28,9 @@ type Module struct {
 }
 
 type ModuleHandlers struct {
-	Theme ThemeAdapter
+	THEME ThemeAdapter
 	DBA   DataBaseAdapter
-	Time  TimeAdapter
+	TIME  TimeAdapter
 	DOM   DomAdapter
+	HTTP  HttpAdapter
 }

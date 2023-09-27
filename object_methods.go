@@ -74,7 +74,7 @@ func (o Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) {
 
 //ej: "id_client"
 func (o Object) PrimaryKeyName() string {
-	return PREFIX_ID_NAME + o.Name
+	return PREFIX_ID_NAME + o.Table
 }
 
 func (o Object) GetID(data_search map[string]string) string {
@@ -83,7 +83,7 @@ func (o Object) GetID(data_search map[string]string) string {
 		return id
 	}
 
-	return "ERROR_NO_ID_" + o.Name
+	return "ERROR_NO_ID_" + o.Table
 }
 
 func (o Object) FieldExist(field_name string) (Field, bool) {

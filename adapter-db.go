@@ -15,5 +15,10 @@ type DataBaseAdapter interface {
 	UpdateObjectsInDB(table_name string, data ...map[string]string) ([]map[string]string, error)
 	DeleteObjectsInDB(table_name string, data ...map[string]string) ([]map[string]string, error)
 
-	CreateTablesInDB(...*Object) error
+	CreateTablesInDB(objects []*Object, action Subsequently) error
+}
+
+// acción a ejecutar posteriormente
+type Subsequently interface {
+	ActionExecutedLater()
 }
