@@ -7,6 +7,7 @@ type Field struct {
 	// otros ej: id_usuario, apellido, address, city etc
 	Name          string
 	Legend        string //como se mostrara al usuario el campo en el encabezado ej: "name" por "Nombre Usuario"
+	SourceTable   string // tabla origen ej: patient,user,product
 	NotRenderHtml bool   // si no se necesita en formulario html
 
 	*Input

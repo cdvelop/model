@@ -33,12 +33,12 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 					return Error("llave Primaria inexistente")
 				}
 
-				field, err := o.GetFieldByName(o.PrimaryKeyName())
+				field, err := o.GetFieldsByNames(o.PrimaryKeyName())
 				if err != nil {
 					return err
 				}
 
-				err = field.Input.ValidateField(pk_value, false)
+				err = field[0].Input.ValidateField(pk_value, false)
 				if err != nil {
 					return Error("llave Primaria invalida", err.Error())
 				}

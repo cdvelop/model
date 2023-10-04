@@ -3,7 +3,7 @@ package model
 import "strings"
 
 func (o Object) GetRepresentativeTextField(data_element map[string]string) (values string) {
-	for _, keyNameModel := range o.TextFieldNames {
+	for _, keyNameModel := range o.NamePrincipalFields {
 		if valueFound, ok := data_element[keyNameModel]; ok {
 			values += valueFound + ` `
 		}
@@ -19,46 +19,57 @@ func (o Object) Columns() (columns []string) {
 	return
 }
 
-func (o Object) GetFieldByName(required_name string) (Field, error) {
-	for _, field := range o.Fields {
-		if required_name == field.Name {
-			return field, nil
-		}
-	}
-	return Field{}, Error("campo:", required_name, "no encontrado")
-}
+func (o Object) GetFieldsByNames(required_names ...string) ([]Field, error) {
 
-func (o Object) FilterFields(namesRequired ...string) (fielsOut []Field) {
+	if len(required_names) == 0 {
+		return nil, Error("error debes ingresar mínimo un nombre de campo para buscar")
+	}
+
+	//NOTA: en webAssembly array de Puntero no funciona correctamente
+	var fiels_out []Field
+
 	for _, field := range o.Fields {
-		for _, nameRq := range namesRequired {
+		for _, nameRq := range required_names {
 			if nameRq == field.Name {
-				fielsOut = append(fielsOut, field)
+				fiels_out = append(fiels_out, field)
 				break
 			}
 		}
 	}
-	return
+
+	if len(fiels_out) != 0 {
+		return fiels_out, nil
+	}
+
+	var space string
+	var err_names string
+	for _, name := range required_names {
+		err_names += space + name
+		space = " "
+	}
+
+	return nil, Error("campo(s)", err_names, "no encontrado(s)")
 }
 
-func (o Object) RenderFields() (fielsOut []Field) {
+func (o Object) RenderFields() (fiels_out []Field) {
 	for _, field := range o.Fields {
-		if !field.NotRenderHtml {
-			fielsOut = append(fielsOut, field)
+		if !field.NotRenderHtml && field.Input != nil {
+			fiels_out = append(fiels_out, field)
 		}
 	}
 	return
 }
 
-func (o Object) RequiredFields() (fielsOut []Field) {
+func (o Object) RequiredFields() (fiels_out []Field) {
 	for _, field := range o.Fields {
 		if !field.SkipCompletionAllowed {
-			fielsOut = append(fielsOut, field)
+			fiels_out = append(fiels_out, field)
 		}
 	}
 	return
 }
 
-func (o Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) {
+func (o Object) FilterRemoveFields(namesToRemove ...string) (fiels_out []Field) {
 	removeNames := make(map[string]bool, len(namesToRemove))
 	for _, name := range namesToRemove {
 		removeNames[name] = false
@@ -66,15 +77,10 @@ func (o Object) FilterRemoveFields(namesToRemove ...string) (fielsOut []Field) {
 
 	for _, field := range o.Fields {
 		if _, exist := removeNames[field.Name]; !exist {
-			fielsOut = append(fielsOut, field)
+			fiels_out = append(fiels_out, field)
 		}
 	}
 	return
-}
-
-//ej: "id_client"
-func (o Object) PrimaryKeyName() string {
-	return PREFIX_ID_NAME + o.Table
 }
 
 func (o Object) GetID(data_search map[string]string) string {

@@ -9,6 +9,10 @@ type FrontendHandler struct {
 	AfterRead
 	AfterUpdate
 	AfterDelete
+
+	NotifyBootData
+
+	ViewHandler
 }
 
 type AfterCreate interface {
@@ -25,6 +29,16 @@ type AfterUpdate interface {
 
 type AfterDelete interface {
 	SetObjectInDomAfterDelete(data ...map[string]string) error
+}
+
+type NotifyBootData interface {
+	NotifyBootDataIsLoaded()
+}
+
+type ViewHandler interface {
+	ObjectVIEW() *Object
+	BuildTag() string
+	HtmlContainer() string
 }
 
 // container_id ej: "contenedor-objeto"

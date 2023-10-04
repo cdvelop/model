@@ -5,8 +5,8 @@ type Object struct {
 	Name  string
 	Table string //tabla origen db ej: users
 
-	TextFieldNames []string //nombre de campos mas representativos ej: name, address, phone
-	Fields         []Field  //campos
+	NamePrincipalFields []string //campos mas representativos ej: name, address, phone
+	Fields              []Field  //campos
 
 	*Module // módulo origen
 

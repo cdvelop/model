@@ -6,7 +6,7 @@
 func MedicalHistory() model.Object {
 	return model.Object{
 		Name:           "medicalhistory",
-		TextFieldNames: []string{"service_name"},
+		NamePrincipalFields: []string{"service_name"},
 		Fields: []model.Field{
 			{Name: "id_medicalhistory", Legend: "id", Input: input.Pk()},
 			{Name: "id_patient", Legend: "paciente", Input: input.Pk()},
