@@ -1,6 +1,6 @@
 package model
 
 type TimeAdapter interface {
-	// ej: 2023-12-30
+	// layout ej: 2006-01-02
 	ToDay(layout string) string
 }
