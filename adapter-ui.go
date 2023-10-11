@@ -10,6 +10,8 @@ type FrontendHandler struct {
 	AfterUpdate
 	AfterDelete
 
+	AfterClicked
+
 	NotifyBootData
 
 	ViewHandler
@@ -31,11 +33,17 @@ type AfterDelete interface {
 	SetObjectInDomAfterDelete(data ...map[string]string) error
 }
 
+type AfterClicked interface {
+	// objeto fue cliqueado por el usuario
+	UserClicked(id string) error
+}
+
 type NotifyBootData interface {
 	NotifyBootDataIsLoaded()
 }
 
 type ViewHandler interface {
+	ViewComponentName() string
 	ObjectVIEW() *Object
 	BuildTag() string
 	HtmlContainer() string
