@@ -30,6 +30,9 @@ func (o Object) Response(data []map[string]string, options ...string) Response {
 			execute = opt
 		case "delete":
 			execute = opt
+		case "error":
+			execute = opt
+
 		default:
 			message = opt
 		}

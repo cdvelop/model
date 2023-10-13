@@ -9,7 +9,8 @@ type ThemeAdapter interface {
 	MenuItemClass() string // ej: navbar-item
 
 	ModuleClassName() string //ej: slider_panel
-	ModuleTemplate(m *Module, form *Object, options ...string) string
+
+	ModuleTemplate(m *Module, form *Object, list HtmlContainer) string
 
 	FunctionMessageName() string // ej: ShowMessageToUser
 }

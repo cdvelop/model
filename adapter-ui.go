@@ -46,6 +46,11 @@ type ViewHandler interface {
 	ViewComponentName() string
 	ObjectVIEW() *Object
 	BuildTag() string
+	HtmlContainer
+}
+
+// todo el contenido html por defecto del objeto
+type HtmlContainer interface {
 	HtmlContainer() string
 }
 
