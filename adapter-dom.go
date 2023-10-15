@@ -4,8 +4,9 @@ type DomAdapter interface {
 	Log
 	UserMessage
 
-	InsertAfterBegin(...ViewHandler)
-	InsertBeforeEnd(...ViewHandler)
+	InnerHTML(html_content string, o *Object)
+	InsertAfterBegin(html_content string, o *Object)
+	InsertBeforeEnd(html_content string, o *Object)
 
 	Clicking(o *Object) error
 }

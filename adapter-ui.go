@@ -44,7 +44,6 @@ type NotifyBootData interface {
 
 type ViewHandler interface {
 	ViewComponentName() string
-	ObjectVIEW() *Object
 	BuildTag() string
 	HtmlContainer
 }
