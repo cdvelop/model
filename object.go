@@ -26,17 +26,11 @@ func (o Object) Response(data []map[string]string, options ...string) Response {
 	var message string
 	for _, opt := range options {
 		switch opt {
-		case "update":
+		case "update", "delete", "error", "test":
 			execute = opt
-		case "delete":
-			execute = opt
-		case "error":
-			execute = opt
-
 		default:
 			message = opt
 		}
-
 	}
 
 	return Response{

@@ -33,4 +33,5 @@ type ModuleHandlers struct {
 	TIME  TimeAdapter
 	DOM   DomAdapter
 	HTTP  HttpAdapter
+	// TEST  TestAdapter
 }

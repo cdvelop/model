@@ -8,7 +8,17 @@ type DomAdapter interface {
 	InsertAfterBegin(html_content string, o *Object)
 	InsertBeforeEnd(html_content string, o *Object)
 
-	Clicking(o *Object) error
+	Clicking(o *Object, id string) error
+
+	ClickModule(module_name string) error
+
+	Form
+}
+
+type Form interface {
+	FormReset(o *Object) error
+	FormAutoFill(o *Object) error
+	FormComplete(o *Object, data map[string]string) error
 }
 
 type Log interface {
