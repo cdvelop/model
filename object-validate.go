@@ -14,7 +14,7 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 		//verificar si campos pertenecen a la tabla
 		for field_name := range data {
 			if _, exist := o.FieldExist(field_name); !exist {
-				wrongFields = append(wrongFields, field_name+" no pertenece a la tabla "+o.Name)
+				wrongFields = append(wrongFields, field_name+" no pertenece a la tabla "+o.Table)
 			}
 		}
 		if len(wrongFields) != 0 {

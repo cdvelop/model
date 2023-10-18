@@ -1,5 +1,9 @@
 package model
 
+type IdHandler interface {
+	GetNewID() string
+}
+
 type DataBaseAdapter interface {
 	CreateObjectsInDB(table_name string, data ...map[string]string) error
 

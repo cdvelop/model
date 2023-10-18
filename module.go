@@ -25,6 +25,8 @@ type Module struct {
 	Objects []*Object
 
 	*ModuleHandlers
+	// tipo de entradas usadas en el modulo
+	Inputs []*Input
 }
 
 type ModuleHandlers struct {
