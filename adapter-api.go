@@ -8,7 +8,7 @@ type BackendHandler struct {
 	UpdateApi
 	DeleteApi
 
-	FileApi
+	FileHandler
 }
 
 type BootResponse interface {
@@ -31,14 +31,19 @@ type DeleteApi interface {
 	Delete(u *User, data ...map[string]string) ([]map[string]string, error)
 }
 
-type FileApi interface {
+type FileHandler interface {
 	// PrepareFileData(header_name, extension string, form_data map[string]string) map[string]string
 	//header_name ej: fileHeader.Filename, extension ej: .jpeg
 	RegisterNewFile(header_name, upload_folder, file_name, extension string, form_data map[string]string) (map[string]string, error)
 	ConfigFile() *FileConfig
 	UploadFolderPath(form_data map[string]string) string // carpeta de destino
 	FileName() string                                    // retornar nombre de archivo sin extension
-	GetFilePath(u *User, params map[string]string) (file_path string, err error)
+	FileApi
+}
+
+type FileApi interface {
+	// ej: id:123
+	GetFilePathByID(params map[string]string) (file_path, area string, err error)
 }
 
 type FileConfig struct {
