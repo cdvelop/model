@@ -24,17 +24,6 @@ type Module struct {
 	// objetos o componentes que contiene el modulo ej: patient,user,datalist,search....
 	Objects []*Object
 
-	*ModuleHandlers
 	// tipo de entradas usadas en el modulo
 	Inputs []*Input
-}
-
-type ModuleHandlers struct {
-	THEME ThemeAdapter
-	DBA   DataBaseAdapter
-	TIME  TimeAdapter
-	DOM   DomAdapter
-	HTTP  HttpAdapter
-	AUTH  AuthAdapter
-	// TEST  TestAdapter
 }
