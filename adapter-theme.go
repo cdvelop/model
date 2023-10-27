@@ -13,4 +13,6 @@ type ThemeAdapter interface {
 	ModuleTemplate(m *Module, form *Object, list HtmlContainer) string
 
 	FunctionMessageName() string // ej: ShowMessageToUser
+	// ej query: "div#"+o.ModuleName+" [data-id='"+o.Name+"']"
+	QuerySelectorObject(module_name, object_name string) (query string)
 }

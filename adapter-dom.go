@@ -10,6 +10,7 @@ type DomAdapter interface {
 	Clicking(o *Object, id string) error
 
 	ClickModule(module_name string) error
+	CallFunction(functionName string, args ...any) error
 
 	Form
 }
