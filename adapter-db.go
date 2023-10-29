@@ -21,6 +21,7 @@ type DataBaseAdapter interface {
 	//params: callback fun ej: fun([]map[string]string,error)
 	// "ORDER_BY": "patient_name", "SORT":"DESC" DEFAULT "ASC"
 	ReadDataAsyncInDB(from_tables string, params []map[string]string, callback func([]map[string]string, error))
+
 	UpdateObjectsInDB(table_name string, data ...map[string]string) ([]map[string]string, error)
 	DeleteObjectsInDB(table_name string, data ...map[string]string) ([]map[string]string, error)
 

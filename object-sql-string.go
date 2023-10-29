@@ -17,7 +17,8 @@ func (o Object) PrimaryKeyName(options ...string) string {
 func (o Object) JoinFieldNames(add_prefix_table_name bool) (out string) {
 	var comma string
 
-	for _, f := range o.Fields {
+	for _, f := range o.OnlyRequiredFieldsInDB() {
+		// fmt.Println(o.Table, "CAMPO REQUERIDO EN DB:", f.Name)
 		if add_prefix_table_name {
 			if f.SourceTable != "" {
 				out += comma + f.SourceTable + "." + f.Name
@@ -31,6 +32,16 @@ func (o Object) JoinFieldNames(add_prefix_table_name bool) (out string) {
 		comma = ","
 	}
 
+	return
+}
+
+//solo campos requeridos en la base de datos. NOTA: puntero []*Field no funciona con slice
+func (o Object) OnlyRequiredFieldsInDB() (db_field []Field) {
+	for _, f := range o.Fields {
+		if !f.NotRequiredInDB {
+			db_field = append(db_field, f)
+		}
+	}
 	return
 }
 
