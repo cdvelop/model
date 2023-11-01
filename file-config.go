@@ -22,20 +22,19 @@ type FileConfig struct {
 	MaximumKbSize       int64  // tamaño máximo individual kb ej: 100
 	AllowedExtensions   string // exenciones permitidas ej: ".jpg, .png, .jpeg"
 
-	ImagenWidth  string
-	ImagenHeight string
+	ImagenWidth  string // ej: 800
+	ImagenHeight string // ej: 600
 
 	RootFolder string //ej: static_files default "app_files"
 	FileType   string // ej: imagen,video,document,pdf
 
-	StoreBinaryInDbEngine   bool // si se guardara en el motor de la base de datos, por defecto en el disco como archivo
-	AddBinaryInReadResponse bool // si se necesita que se retorne el archivo en formato binario blob
+	SavedAsBlobInDb bool // si se guardara en el motor de la base de datos, por defecto en el disco como archivo
 
 	//field
-	IdFieldName        string //ej: id_medicalhistory
-	Name               string //ej: endoscopia, pictures
-	Legend             string //ej: Imágenes,Boletas etc
-	DefaultEnableInput bool   // si se necesita habilitado resetear el campo por defecto falso
+	FieldNameWithObjectID string //ej: id_medicalhistory
+	Name                  string //ej: endoscopia, pictures
+	Legend                string //ej: Imágenes,Boletas etc
+	DefaultEnableInput    bool   // si se necesita habilitado resetear el campo por defecto falso
 
 }
 
@@ -45,4 +44,5 @@ type FileNewToStore struct {
 	FileNameOnDisk       string // no extension ej: 1223, archivo_235, 001_file
 	FileArea             string // area que tendrá el archivo ej: s,a,1,3,4
 	Extension            string // ej .jpg,.mp4
+	BlobData             []byte // data del archivo
 }

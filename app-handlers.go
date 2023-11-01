@@ -9,4 +9,5 @@ type Handlers struct {
 	AuthAdapter
 	Logger
 	// TEST  TestAdapter
+	DiskAdapter
 }

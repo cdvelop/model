@@ -26,7 +26,7 @@ type InputReset interface {
 }
 
 type InputView interface {
-	BuildNewView(value string) (html string)
+	BuildNewView(new_data []map[string]string) (html string)
 }
 
 type Validate interface {
