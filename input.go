@@ -9,7 +9,7 @@ type Input struct {
 	Maximum int
 
 	Tag
-	InputView
+	ItemView
 	InputReset
 	Validate
 
@@ -18,15 +18,11 @@ type Input struct {
 
 type Tag interface {
 	HtmlName() string
-	HtmlTag(id, field_name string, allow_skip_completed bool) string
+	ContainerView
 }
 
 type InputReset interface {
 	ResetInput()
-}
-
-type InputView interface {
-	BuildNewView(new_data []map[string]string) (html string)
 }
 
 type Validate interface {

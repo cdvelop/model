@@ -7,7 +7,8 @@ type IdHandler interface {
 type DataBaseAdapter interface {
 	IdHandler
 	RunOnClientDB() bool //verdadero corren en el cliente ej browser. por defecto falso corre en el servidor
-	CreateObjectsInDB(table_name string, backup_required bool, data ...map[string]string) error
+	// items support in server db: []map[string]string, map[string]string
+	CreateObjectsInDB(table_name string, backup_required bool, items any) error
 
 	// from_tables ej: "users,products" or: public.reservation, public.patient"
 	// params: map[string]string ej:{

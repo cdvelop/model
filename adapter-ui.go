@@ -5,6 +5,8 @@ type UI interface {
 }
 
 type FrontendHandler struct {
+	// StoreData
+
 	AfterCreate
 	AfterRead
 	AfterUpdate
@@ -16,6 +18,10 @@ type FrontendHandler struct {
 
 	ViewHandler
 }
+
+// type StoreData interface {
+// 	GenerateStoreData(items ...any) (store_data map[string]interface{}, err error)
+// }
 
 type AfterCreate interface {
 	SetObjectInDomAfterCreate(data ...map[string]string) error
@@ -43,14 +49,18 @@ type NotifyBootData interface {
 }
 
 type ViewHandler interface {
-	ViewComponentName() string
-	BuildTag() string
-	HtmlContainer
+	ViewHandlerName() string
+	ContainerView
+	ItemView
 }
 
 // todo el contenido html por defecto del objeto
-type HtmlContainer interface {
-	HtmlContainer() string
+type ContainerView interface {
+	BuildContainerView(id, field_name string, allow_skip_completed bool) string
+}
+
+type ItemView interface {
+	BuildItemView(all_data ...map[string]string) (html string)
 }
 
 // container_id ej: "contenedor-objeto"

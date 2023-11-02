@@ -44,5 +44,5 @@ type FileNewToStore struct {
 	FileNameOnDisk       string // no extension ej: 1223, archivo_235, 001_file
 	FileArea             string // area que tendrá el archivo ej: s,a,1,3,4
 	Extension            string // ej .jpg,.mp4
-	BlobData             []byte // data del archivo
+	BlobData             any    // data del archivo
 }

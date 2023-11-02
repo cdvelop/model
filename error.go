@@ -6,7 +6,7 @@ type err struct {
 	message string
 }
 
-//only support: error, int, int64, string
+//only support: error, int, int64, string, map[string]interface{}
 func Error(messages ...any) *err {
 
 	var text string
@@ -26,6 +26,14 @@ func Error(messages ...any) *err {
 
 		case string:
 			txt = v
+
+		case map[string]interface{}:
+			var comma string
+			for t := range v {
+				txt += comma + t
+				comma = ","
+			}
+
 		}
 
 		if txt == "" {
