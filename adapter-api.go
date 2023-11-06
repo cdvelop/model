@@ -24,7 +24,7 @@ type ReadApi interface {
 }
 
 type UpdateApi interface {
-	Update(u *User, data ...map[string]string) ([]map[string]string, error)
+	Update(u *User, data ...map[string]string) error
 }
 
 type DeleteApi interface {
