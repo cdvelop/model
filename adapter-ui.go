@@ -5,8 +5,6 @@ type UI interface {
 }
 
 type FrontendHandler struct {
-	// StoreData
-
 	AfterCreate
 	AfterRead
 	AfterUpdate
@@ -17,6 +15,8 @@ type FrontendHandler struct {
 	NotifyBootData
 
 	ViewHandler
+
+	ViewReset
 }
 
 // type StoreData interface {
@@ -52,6 +52,10 @@ type ViewHandler interface {
 	ViewHandlerName() string
 	ContainerView
 	ItemView
+}
+
+type ViewReset interface {
+	ResetView()
 }
 
 // todo el contenido html por defecto del objeto

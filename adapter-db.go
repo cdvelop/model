@@ -21,12 +21,15 @@ type DataBaseAdapter interface {
 	ReadObjectsInDB(from_tables string, params ...map[string]string) ([]map[string]string, error)
 	//params: callback fun ej: fun([]map[string]string,error)
 	// "ORDER_BY": "patient_name", "SORT":"DESC" DEFAULT "ASC"
-	ReadDataAsyncInDB(from_tables string, params []map[string]string, callback func([]map[string]string, error))
+	ReadStringDataAsyncInDB(r ReadDBParams, callback func([]map[string]string, error))
+	ReadAnyDataAsyncInDB(r ReadDBParams, callback func([]map[string]interface{}, error))
 
 	UpdateObjectsInDB(table_name string, data ...map[string]string) error
 	DeleteObjectsInDB(table_name string, data ...map[string]string) error
 
 	CreateTablesInDB(objects []*Object, action Subsequently) error
+
+	BackupDataBase(callback func(error))
 }
 
 // acción a ejecutar posteriormente

@@ -10,4 +10,5 @@ type Handlers struct {
 	Logger
 	// TEST  TestAdapter
 	FileAdapter
+	ObjectAdapter
 }

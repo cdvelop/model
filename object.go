@@ -13,6 +13,10 @@ type Object struct {
 	BackendHandler
 
 	FrontendHandler
+
+	PrinterHandler
+
+	FormAdapter
 }
 
 func (o Object) MainName() string {
