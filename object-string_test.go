@@ -12,7 +12,7 @@ func TestGetTablesNames(t *testing.T) {
 	obj := model.Object{
 		Name:                "user",
 		Table:               "user",
-		NamePrincipalFields: []string{},
+		PrincipalFieldsName: []string{},
 		Fields: []model.Field{
 			{Name: "name", Legend: "Nombre", NotRenderHtml: true},
 

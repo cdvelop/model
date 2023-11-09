@@ -3,7 +3,7 @@ package model
 import "strings"
 
 func (o Object) GetRepresentativeTextField(data_element map[string]string) (values string) {
-	for _, keyNameModel := range o.NamePrincipalFields {
+	for _, keyNameModel := range o.PrincipalFieldsName {
 		if valueFound, ok := data_element[keyNameModel]; ok {
 			values += valueFound + ` `
 		}

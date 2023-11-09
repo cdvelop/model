@@ -5,7 +5,7 @@ type Object struct {
 	Name  string
 	Table string //tabla origen db ej: users
 
-	NamePrincipalFields []string //campos mas representativos ej: name, address, phone
+	PrincipalFieldsName []string //campos mas representativos ej: name, address, phone
 	Fields              []Field  //campos
 
 	*Module // módulo origen
@@ -16,6 +16,7 @@ type Object struct {
 
 	PrinterHandler
 
+	FormData map[string]string // data temporal formulario
 	FormAdapter
 }
 

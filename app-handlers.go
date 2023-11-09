@@ -1,6 +1,7 @@
 package model
 
 type Handlers struct {
+	AppInfo
 	ThemeAdapter
 	DataBaseAdapter
 	TimeAdapter
