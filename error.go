@@ -1,12 +1,14 @@
 package model
 
-import "strconv"
+import (
+	"strconv"
+)
 
 type err struct {
 	message string
 }
 
-//only support: error, int, int64, string, map[string]interface{}
+// only support: error, int, int64, string, map[string]interface{}
 func Error(messages ...any) *err {
 
 	var text string
@@ -35,6 +37,8 @@ func Error(messages ...any) *err {
 			}
 
 		}
+
+		// fmt.Printf("mensaje %d (%T): %v\n", i, msg, msg)
 
 		if txt == "" {
 			txt = "¡valor n°:" + strconv.Itoa(i) + " no soportado en mensaje error!"

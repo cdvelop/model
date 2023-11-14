@@ -27,7 +27,7 @@ type DataBaseAdapter interface {
 	UpdateObjectsInDB(table_name string, data ...map[string]string) error
 	DeleteObjectsInDB(table_name string, data ...map[string]string) error
 
-	CreateTablesInDB(objects []*Object, action Subsequently) error
+	CreateTablesInDB(objects []*Object, result func(error))
 
 	BackupDataBase(callback func(error))
 }

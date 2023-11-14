@@ -7,8 +7,6 @@ type BackendHandler struct {
 	ReadApi
 	UpdateApi
 	DeleteApi
-
-	FileHandler
 }
 
 type BootResponse interface {

@@ -17,7 +17,6 @@ type Object struct {
 	PrinterHandler
 
 	FormData map[string]string // data temporal formulario
-	FormAdapter
 }
 
 func (o Object) MainName() string {

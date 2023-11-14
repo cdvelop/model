@@ -1,9 +1,17 @@
 package model
 
 // DataEncode quita los nombres de los campos de la data según modelo del objeto
-func (o Object) DataEncode(all_data ...map[string]string) (out []CutData) {
+func (o Object) DataEncode(all_data ...map[string]string) ([]CutData, error) {
+
+	var out []CutData
+
+	if len(all_data) == 0 {
+		return out, nil
+	}
 
 	for _, data := range all_data {
+
+		// fmt.Println("ENTRO ACA:", data)
 
 		var index_equal_positions = true
 
@@ -45,7 +53,15 @@ func (o Object) DataEncode(all_data ...map[string]string) (out []CutData) {
 			// fmt.Println("** DATA IGUAL = INDICE (-1)", data)
 		}
 
-		out = append(out, cut_data)
+		// fmt.Println("** CUT_DATA ", cut_data)
+		if len(cut_data.Data) != 0 {
+			out = append(out, cut_data)
+		}
 	}
-	return
+
+	if len(out) == 0 {
+		return nil, Error("error DataEncode campos enviados no coinciden con el modelo del objeto:", o.Name)
+	}
+
+	return out, nil
 }

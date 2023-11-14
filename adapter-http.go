@@ -1,7 +1,11 @@
 package model
 
-type HttpAdapter interface {
-	//action: create,read,update,delete,file
-	SendJson(o *Object, in_data []map[string]string, action string, out_resp func([]Response, error))
-	SendFormData(object_name string, data map[string]interface{}, out_resp func(Response, error))
+type FetchAdapter interface {
+	//method ej: GET,POST
+	// endpoint ej: http://localhost/upload
+	// object ej: imagen
+	// body_rq any ej: []map[string]string, map[string]string
+	SendOneRequest(method, endpoint, object string, body_rq any, response func([]map[string]string, error))
+	// only POST method
+	SendAllRequests(endpoint string, body_rq []Response, response func([]Response, error))
 }
