@@ -16,7 +16,7 @@ func (o Object) DataDecode(cut_data ...CutData) ([]map[string]string, error) {
 			// fmt.Println("DATA IGUAL INDICE (-1)", pst_1, c.Data)
 
 			if len(c.Data) != len(o.Fields) {
-				return nil, Error("error tamaño data: " + strconv.Itoa(len(c.Data)) + " en DataDecode es diferente al del modelo del objeto " + o.Name + ": " + strconv.Itoa(len(o.Fields)))
+				return nil, Error("error tamaño data: " + strconv.Itoa(len(c.Data)) + " en DataDecode es diferente al del modelo del objeto " + o.ObjectName + ": " + strconv.Itoa(len(o.Fields)))
 			}
 
 			for field_index, field := range o.Fields {
@@ -32,7 +32,7 @@ func (o Object) DataDecode(cut_data ...CutData) ([]map[string]string, error) {
 			}
 
 			if len(c.Index) > len(o.Fields) {
-				return nil, Error("tamaño index: " + strconv.Itoa(len(c.Index)) + " en DataDecode es mayor al del modelo del objeto " + o.Name + ": " + strconv.Itoa(len(o.Fields)))
+				return nil, Error("tamaño index: " + strconv.Itoa(len(c.Index)) + " en DataDecode es mayor al del modelo del objeto " + o.ObjectName + ": " + strconv.Itoa(len(o.Fields)))
 			}
 
 			for field_index, field := range o.Fields {

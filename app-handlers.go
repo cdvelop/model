@@ -1,6 +1,7 @@
 package model
 
 type Handlers struct {
+	ProductionMode bool
 	FileRootFolder string // default "app_files"
 	AppInfo
 	AuthAdapter
@@ -11,13 +12,17 @@ type Handlers struct {
 	ThemeAdapter
 	DataBaseAdapter
 	TimeAdapter
+
 	DomAdapter
+	FormAdapter
+
 	FetchAdapter
-	Logger
 	DataConverter
 
 	FileApi
 	FileDiskRW
 
+	MessageAdapter
+	Logger
 	// TEST  TestAdapter
 }

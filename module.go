@@ -26,4 +26,6 @@ type Module struct {
 
 	// tipo de entradas usadas en el modulo
 	Inputs []*Input
+
+	*Handlers
 }

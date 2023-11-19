@@ -60,7 +60,7 @@ func (o Object) DataEncode(all_data ...map[string]string) ([]CutData, error) {
 	}
 
 	if len(out) == 0 {
-		return nil, Error("error DataEncode campos enviados no coinciden con el modelo del objeto:", o.Name)
+		return nil, Error("error DataEncode campos enviados no coinciden con el modelo del objeto:", o.ObjectName)
 	}
 
 	return out, nil

@@ -21,6 +21,10 @@ type ReadApi interface {
 	Read(u *User, data ...map[string]string) ([]map[string]string, error)
 }
 
+type ReadData interface {
+	ReadByID(id string) ([]map[string]string, error)
+}
+
 type UpdateApi interface {
 	Update(u *User, data ...map[string]string) error
 }

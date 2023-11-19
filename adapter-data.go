@@ -10,6 +10,6 @@ type DataConverter interface {
 	EncodeMaps(map_in any, object_name ...string) (out []byte, err error)
 	DecodeMaps(in []byte, object_name ...string) (out []map[string]string, err error)
 
-	EncodeResponses(requests []Response) ([]byte, error)
+	EncodeResponses(requests ...Response) ([]byte, error)
 	DecodeResponses(data []byte) ([]Response, error)
 }

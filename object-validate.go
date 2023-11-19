@@ -1,11 +1,19 @@
 package model
 
 import (
-	"strings"
+	"github.com/cdvelop/strings"
 )
+
+type AlternativeValidateAdapter interface {
+	ValidateData(its_new, its_update_or_delete bool, all_data ...map[string]string) error
+}
 
 // validar data objeto
 func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map[string]string) error {
+
+	if o.AlternativeValidateAdapter != nil {
+		return o.AlternativeValidateAdapter.ValidateData(its_new, its_update_or_delete, all_data...)
+	}
 
 	for _, data := range all_data {
 
@@ -71,7 +79,7 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 			} else {
 				// si no existe y es requerido y no es llave primaria  ni llave foránea
 				// fmt.Printf("NO EXISTE %v DATO\n", field.Name)
-				if !strings.Contains(field.Name, o.PrimaryKeyName()) {
+				if strings.Contains(field.Name, o.PrimaryKeyName()) == 0 {
 					// fmt.Printf("NO ES LLAVE PRIMARIA %v \n", table_name)
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field, nil))
 				}

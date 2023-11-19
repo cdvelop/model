@@ -29,7 +29,7 @@ func (h Handlers) GetModuleByName(module_name string) (*Module, error) {
 	}
 
 	for _, m := range h.modules {
-		// d.Log("BUSCANDO OBJETO:", o.Name)
+		// d.Log("BUSCANDO OBJETO:", o.ObjectName)
 		if m.ModuleName == module_name {
 			return m, nil
 		}

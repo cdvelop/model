@@ -10,7 +10,7 @@ func (h *Handlers) AddObjects(new_objects ...*Object) {
 
 	for _, new := range new_objects {
 		for _, o := range h.objects {
-			if o.Name == new.Name {
+			if o.ObjectName == new.ObjectName {
 				return
 			}
 		}
@@ -27,15 +27,15 @@ func (h Handlers) GetObjects() []*Object {
 func (h Handlers) GetObjectByName(object_name string) (*Object, error) {
 	// d.Log("total objetos:", len(d.objects))
 	if object_name == "" {
-		return nil, Error("error nombre objeto no puede estar vació")
+		return nil, Error("nombre objeto no puede estar vació")
 	}
 
 	for _, o := range h.objects {
-		// d.Log("BUSCANDO OBJETO:", o.Name)
-		if o.Name == object_name {
+		// d.Log("BUSCANDO OBJETO:", o.ObjectName)
+		if o.ObjectName == object_name {
 			return o, nil
 		}
 	}
 
-	return nil, Error("error objeto:", object_name, ",no encontrado")
+	return nil, Error("objeto:", object_name, "no encontrado")
 }

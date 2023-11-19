@@ -2,11 +2,12 @@ package model
 
 type Object struct {
 	// ej: module.client, client.search_footer,user.datalist
-	Name  string
-	Table string //tabla origen db ej: users
+	ObjectName string
+	Table      string //tabla origen db ej: users
 
 	PrincipalFieldsName []string //campos mas representativos ej: name, address, phone
-	Fields              []Field  //campos
+	NoAddObjectInDB     bool
+	Fields              []Field //campos
 
 	*Module // módulo origen
 
@@ -17,10 +18,12 @@ type Object struct {
 	PrinterHandler
 
 	FormData map[string]string // data temporal formulario
+
+	AlternativeValidateAdapter
 }
 
 func (o Object) MainName() string {
-	return o.Name
+	return o.ObjectName
 }
 
 // options ej: update,delete,"mensaje a enviar" default action: create
@@ -39,7 +42,7 @@ func (o Object) Response(data []map[string]string, options ...string) Response {
 
 	return Response{
 		Action:  execute,
-		Object:  o.Name,
+		Object:  o.ObjectName,
 		Message: message,
 		Data:    data,
 	}

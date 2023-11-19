@@ -3,6 +3,7 @@ package model
 type TimeAdapter interface {
 	TimeNow
 	TimeWeek
+	UnixTimeHandler
 }
 
 type TimeNow interface {

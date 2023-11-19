@@ -10,7 +10,7 @@ import (
 func TestGetTablesNames(t *testing.T) {
 
 	obj := model.Object{
-		Name:                "user",
+		ObjectName:          "user",
 		Table:               "user",
 		PrincipalFieldsName: []string{},
 		Fields: []model.Field{
