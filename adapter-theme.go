@@ -10,9 +10,11 @@ type ThemeAdapter interface {
 
 	ModuleClassName() string //ej: slider_panel
 
-	ModuleTemplate(m *Module, form *Object, list ContainerView) string
+	ModuleTemplate(m *Module, form *Object, list ContainerViewAdapter) string
 
 	FunctionMessageName() string // ej: ShowMessageToUser
 	// ej query: "div#"+o.ModuleName+" [data-id='"+o.ObjectName+"']"
-	QuerySelectorObject(module_name, object_name string) (query string)
+	QuerySelectorMenuModule(module_name string) string
+	QuerySelectorModule(module_name string) string
+	QuerySelectorObject(module_name, object_name string) string
 }

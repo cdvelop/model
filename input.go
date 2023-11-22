@@ -9,8 +9,8 @@ type Input struct {
 	Maximum int
 
 	Tag
-	ItemView
-	InputReset
+	ItemViewAdapter
+	ResetViewAdapter
 	Validate
 
 	TestData
@@ -18,11 +18,7 @@ type Input struct {
 
 type Tag interface {
 	HtmlName() string
-	ContainerView
-}
-
-type InputReset interface {
-	ResetInput()
+	ContainerViewAdapter
 }
 
 type Validate interface {

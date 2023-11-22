@@ -15,6 +15,7 @@ type Handlers struct {
 
 	DomAdapter
 	FormAdapter
+	HtmlAdapter
 
 	FetchAdapter
 	DataConverter
@@ -24,5 +25,6 @@ type Handlers struct {
 
 	MessageAdapter
 	Logger
-	// TEST  TestAdapter
+
+	Test *Tests
 }

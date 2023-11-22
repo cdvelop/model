@@ -31,8 +31,3 @@ type DataBaseAdapter interface {
 
 	BackupDataBase(callback func(error))
 }
-
-// acción a ejecutar posteriormente
-type Subsequently interface {
-	ActionExecutedLater()
-}

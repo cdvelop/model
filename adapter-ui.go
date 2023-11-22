@@ -14,9 +14,9 @@ type FrontendHandler struct {
 
 	NotifyBootData
 
-	ViewHandler
+	ViewAdapter
 
-	ViewReset
+	ResetViewObjectAdapter
 }
 
 // type StoreData interface {
@@ -48,23 +48,20 @@ type NotifyBootData interface {
 	NotifyBootDataIsLoaded()
 }
 
-type ViewHandler interface {
-	ViewHandlerName() string
-	ContainerView
-	ItemView
-}
-
-type ViewReset interface {
-	ResetView()
+type ViewAdapter interface {
+	NameViewAdapter() string
+	ContainerViewAdapter
+	ItemViewAdapter
+	ResetViewAdapter
 }
 
 // todo el contenido html por defecto del objeto
-type ContainerView interface {
+type ContainerViewAdapter interface {
 	BuildContainerView(id, field_name string, allow_skip_completed bool) string
 }
 
-type ItemView interface {
-	BuildItemView(all_data ...map[string]string) (html string)
+type ItemViewAdapter interface {
+	BuildItemsView(all_data ...map[string]string) (html string)
 }
 
 // container_id ej: "contenedor-objeto"

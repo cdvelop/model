@@ -11,9 +11,9 @@ type Object struct {
 
 	*Module // módulo origen
 
-	BackendHandler
+	BackHandler BackendHandler
 
-	FrontendHandler
+	FrontHandler FrontendHandler
 
 	PrinterHandler
 

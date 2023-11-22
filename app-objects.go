@@ -27,7 +27,7 @@ func (h Handlers) GetObjects() []*Object {
 func (h Handlers) GetObjectByName(object_name string) (*Object, error) {
 	// d.Log("total objetos:", len(d.objects))
 	if object_name == "" {
-		return nil, Error("nombre objeto no puede estar vació")
+		return nil, Error("error GetObjectByName nombre objeto no puede estar vació")
 	}
 
 	for _, o := range h.objects {
