@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func wrongMessage(wrongFields []string) error {
+func wrongMessage(wrongFields []string) (err string) {
 
 	// log.Println("WRONG FIELDS: *", wrongFields, "*")
 
@@ -19,13 +19,13 @@ func wrongMessage(wrongFields []string) error {
 
 	// return fmt.Errorf("%v. %v", defMessage, strings.TrimSpace(wf))
 
-	return Error(defMessage + ". " + strings.TrimSpace(wf))
+	return defMessage + ". " + strings.TrimSpace(wf)
 }
 
-func errorMessage(dataIn string, f *Field, err error) (out string) {
+func errorMessage(dataIn string, f *Field, err string) (out string) {
 
-	if err != nil {
-		out = err.Error() + " "
+	if err != "" {
+		out = err + " "
 	}
 
 	var wrong_field string

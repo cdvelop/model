@@ -2,7 +2,7 @@ package model
 
 type ModuleHandler interface {
 	GetModules() []*Module
-	GetModuleByName(module_name string) (*Module, error)
+	GetModuleByName(module_name string) (m *Module, err string)
 }
 
 func (h Handlers) GetModules() []*Module {
@@ -22,18 +22,19 @@ func (h *Handlers) AddModules(new_modules ...*Module) {
 	h.modules = append(h.modules, new_modules...)
 }
 
-func (h Handlers) GetModuleByName(module_name string) (*Module, error) {
+func (h Handlers) GetModuleByName(module_name string) (m *Module, err string) {
+	const this = "GetModuleByName error "
 	// d.Log("total objetos:", len(d.objects))
 	if module_name == "" {
-		return nil, Error("error nombre modulo no puede estar vació")
+		return nil, this + "nombre modulo no puede estar vació"
 	}
 
 	for _, m := range h.modules {
 		// d.Log("BUSCANDO OBJETO:", o.ObjectName)
 		if m.ModuleName == module_name {
-			return m, nil
+			return m, ""
 		}
 	}
 
-	return nil, Error("modulo:", module_name, ", no encontrado")
+	return nil, this + "modulo: " + module_name + ", no encontrado"
 }

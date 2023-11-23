@@ -4,23 +4,22 @@ import (
 	"reflect"
 )
 
-func (h Handlers) CheckInterfaces(pkg_name string, struct_in interface{}) error {
+func (h Handlers) CheckInterfaces(pkg_name string, struct_in interface{}) (err string) {
+	const this = "CheckInterfaces error "
 	nils := h.getNilInterfaces()
 	// fmt.Println("NILS:", nils)
-	names, err := GetFieldNamesFrom(struct_in)
-	if err != nil {
-		return err
-	}
+	names := GetFieldNamesFrom(struct_in)
+
 	// fmt.Println("NAMES:", names)
 	for _, name := range names {
 		for _, n := range nils {
 			if name == n {
-				return Error("error en", pkg_name, "handler nil:", name)
+				return this + "en" + pkg_name + "handler nil: " + name
 			}
 		}
 	}
 
-	return nil
+	return ""
 }
 
 func (h Handlers) getNilInterfaces() []string {
@@ -40,15 +39,14 @@ func (h Handlers) getNilInterfaces() []string {
 	return nullFields
 }
 
-func GetFieldNamesFrom(struct_in interface{}) ([]string, error) {
-	var fieldNames []string
+func GetFieldNamesFrom(struct_in interface{}) (field_names []string) {
 	// Obtener el tipo reflect.Type de la estructura
 	structType := reflect.TypeOf(struct_in)
 	// Iterar sobre los campos de la estructura
 	for i := 0; i < structType.NumField(); i++ {
 		field := structType.Field(i)
-		fieldNames = append(fieldNames, field.Name)
+		field_names = append(field_names, field.Name)
 	}
 
-	return fieldNames, nil
+	return field_names
 }

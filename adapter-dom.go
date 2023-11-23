@@ -5,9 +5,9 @@ type DomAdapter interface {
 	InsertAfterBegin(html_content string, o *Object)
 	InsertBeforeEnd(html_content string, o *Object)
 	// querySelector ej: "a[name='xxx']"
-	ElementClicking(querySelector string) error
+	ElementClicking(querySelector string) (err string)
 
-	CallFunction(functionName string, args ...any)
+	CallFunction(functionName string, args ...any) (err string)
 	//esperar en milliseconds ej: 500, 2000 ..
 	WaitFor(milliseconds int, callback func())
 }

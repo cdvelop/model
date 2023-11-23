@@ -2,9 +2,9 @@ package model
 
 import "strconv"
 
-func (o Object) TestData(required_objects int, skip_id, wrong_data bool) ([]map[string]string, error) {
+func (o Object) TestData(required_objects int, skip_id, wrong_data bool) (out []map[string]string, err string) {
 
-	var out = make([]map[string]string, required_objects)
+	out = make([]map[string]string, required_objects)
 
 	for _, f := range o.Fields {
 
@@ -27,7 +27,7 @@ func (o Object) TestData(required_objects int, skip_id, wrong_data bool) ([]map[
 		}
 
 		if required_objects > len(obtained_data) {
-			return nil, Error("solicitud data fuera de rango", f.Name, "tipo", f.InputName, "solo contiene:", strconv.Itoa(len(obtained_data)))
+			return nil, "TestData error solicitud data fuera de rango " + f.Name + " tipo " + f.InputName + " solo contiene:" + strconv.Itoa(len(obtained_data))
 		}
 
 		for i := 0; i < required_objects; i++ {
@@ -45,5 +45,5 @@ func (o Object) TestData(required_objects int, skip_id, wrong_data bool) ([]map[
 		}
 	}
 
-	return out, nil
+	return out, ""
 }

@@ -10,25 +10,25 @@ type BackendHandler struct {
 }
 
 type BootResponse interface {
-	AddBootResponse(u *User) ([]Response, error)
+	AddBootResponse(u *User) (r []Response, err string)
 }
 
 type CreateApi interface {
-	Create(u *User, data ...map[string]string) error
+	Create(u *User, data ...map[string]string) (err string)
 }
 
 type ReadApi interface {
-	Read(u *User, data ...map[string]string) ([]map[string]string, error)
+	Read(u *User, data ...map[string]string) (out []map[string]string, err string)
 }
 
 type ReadData interface {
-	ReadByID(id string) ([]map[string]string, error)
+	ReadByID(id string) (out []map[string]string, err string)
 }
 
 type UpdateApi interface {
-	Update(u *User, data ...map[string]string) error
+	Update(u *User, data ...map[string]string) (err string)
 }
 
 type DeleteApi interface {
-	Delete(u *User, data ...map[string]string) ([]map[string]string, error)
+	Delete(u *User, data ...map[string]string) (err string)
 }

@@ -1,12 +1,10 @@
 package model
 
 // DataEncode quita los nombres de los campos de la data según modelo del objeto
-func (o Object) DataEncode(all_data ...map[string]string) ([]CutData, error) {
-
-	var out []CutData
+func (o Object) DataEncode(all_data ...map[string]string) (out []CutData, err string) {
 
 	if len(all_data) == 0 {
-		return out, nil
+		return
 	}
 
 	for _, data := range all_data {
@@ -60,8 +58,8 @@ func (o Object) DataEncode(all_data ...map[string]string) ([]CutData, error) {
 	}
 
 	if len(out) == 0 {
-		return nil, Error("error DataEncode campos enviados no coinciden con el modelo del objeto:", o.ObjectName)
+		return nil, "error DataEncode campos enviados no coinciden con el modelo del objeto:" + o.ObjectName
 	}
 
-	return out, nil
+	return out, ""
 }

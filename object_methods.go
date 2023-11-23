@@ -19,14 +19,13 @@ func (o Object) Columns() (columns []string) {
 	return
 }
 
-func (o Object) GetFieldsByNames(required_names ...string) ([]Field, error) {
+func (o Object) GetFieldsByNames(required_names ...string) (fiels_out []Field, err string) {
 
 	if len(required_names) == 0 {
-		return nil, Error("error debes ingresar mínimo un nombre de campo para buscar")
+		return nil, "error debes ingresar mínimo un nombre de campo para buscar"
 	}
 
 	//NOTA: en webAssembly array de Puntero no funciona correctamente
-	var fiels_out []Field
 
 	for _, field := range o.Fields {
 		for _, nameRq := range required_names {
@@ -38,7 +37,7 @@ func (o Object) GetFieldsByNames(required_names ...string) ([]Field, error) {
 	}
 
 	if len(fiels_out) != 0 {
-		return fiels_out, nil
+		return fiels_out, ""
 	}
 
 	var space string
@@ -48,7 +47,7 @@ func (o Object) GetFieldsByNames(required_names ...string) ([]Field, error) {
 		space = " "
 	}
 
-	return nil, Error("campo(s)", err_names, "no encontrado(s)")
+	return nil, "campo(s) " + err_names + " no encontrado(s)"
 }
 
 func (o Object) RenderFields() (fiels_out []Field) {

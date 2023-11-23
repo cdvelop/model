@@ -1,9 +1,9 @@
 package model
 
 type ResetViewAdapter interface {
-	ResetAdapterView()
+	ResetAdapterView() (err string)
 }
 
 type ResetViewObjectAdapter interface {
-	ResetObjectView()
+	ResetObjectView() (err string)
 }

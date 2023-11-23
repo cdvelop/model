@@ -5,11 +5,11 @@ import (
 )
 
 type AlternativeValidateAdapter interface {
-	ValidateData(its_new, its_update_or_delete bool, all_data ...map[string]string) error
+	ValidateData(its_new, its_update_or_delete bool, all_data ...map[string]string) (err string)
 }
 
 // validar data objeto
-func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map[string]string) error {
+func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map[string]string) (err string) {
 
 	if o.AlternativeValidateAdapter != nil {
 		return o.AlternativeValidateAdapter.ValidateData(its_new, its_update_or_delete, all_data...)
@@ -38,17 +38,17 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 
 				pk_value, exist := data[o.PrimaryKeyName()]
 				if !exist {
-					return Error("llave Primaria inexistente")
+					return "llave Primaria inexistente"
 				}
 
 				field, err := o.GetFieldsByNames(o.PrimaryKeyName())
-				if err != nil {
+				if err != "" {
 					return err
 				}
 
 				err = field[0].Input.ValidateField(pk_value, false)
-				if err != nil {
-					return Error("llave Primaria invalida", err.Error())
+				if err != "" {
+					return "llave Primaria invalida " + err
 				}
 
 			}
@@ -61,7 +61,7 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 		}
 	}
 
-	return nil
+	return ""
 }
 
 func (o Object) verificationAllFields(data map[string]string) (wrongFields []string) {
@@ -72,7 +72,7 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 			if dataIn, exists := data[field.Name]; exists {
 
 				err := field.Input.ValidateField(dataIn, field.SkipCompletionAllowed)
-				if err != nil {
+				if err != "" {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field, err))
 				}
 
@@ -81,7 +81,7 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 				// fmt.Printf("NO EXISTE %v DATO\n", field.Name)
 				if strings.Contains(field.Name, o.PrimaryKeyName()) == 0 {
 					// fmt.Printf("NO ES LLAVE PRIMARIA %v \n", table_name)
-					wrongFields = append(wrongFields, errorMessage(dataIn, &field, nil))
+					wrongFields = append(wrongFields, errorMessage(dataIn, &field, ""))
 				}
 			}
 
@@ -89,7 +89,7 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 			if dataIn, exists := data[field.Name]; exists && dataIn != "" {
 				// total_required++
 				err := field.Input.ValidateField(dataIn, field.SkipCompletionAllowed)
-				if err != nil {
+				if err != "" {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field, err))
 				}
 			}
@@ -110,8 +110,8 @@ func (o Object) verificationUpdateFields(data map[string]string) (wrongFields []
 				if !field_found.SkipCompletionAllowed || value != "" { // si es campo requerido se valida o distinto de vació
 
 					err := field_found.Input.ValidateField(value, field_found.SkipCompletionAllowed)
-					if err != nil {
-						wrongFields = append(wrongFields, "dato: "+value+" en: "+field_found.Legend+" "+err.Error())
+					if err != "" {
+						wrongFields = append(wrongFields, "dato: "+value+" en: "+field_found.Legend+" "+err)
 					}
 				}
 

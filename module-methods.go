@@ -1,12 +1,11 @@
 package model
 
 // from ej: file, user
-func (m *Module) AddInputs(new_inputs []*Input, from string) error {
-
+func (m *Module) AddInputs(new_inputs []*Input, from string) (err string) {
 	for _, new := range new_inputs {
 
 		if new == nil {
-			return Error("error input nulo al agregar en modulo:", m.ModuleName, "desde:", from)
+			return "AddInputs error input nulo al agregar en modulo:" + m.ModuleName + "desde:" + from
 		}
 
 		var found bool
@@ -22,5 +21,5 @@ func (m *Module) AddInputs(new_inputs []*Input, from string) error {
 
 	}
 
-	return nil
+	return ""
 }

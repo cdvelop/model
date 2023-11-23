@@ -19,24 +19,20 @@ type FrontendHandler struct {
 	ResetViewObjectAdapter
 }
 
-// type StoreData interface {
-// 	GenerateStoreData(items ...any) (store_data map[string]interface{}, err error)
-// }
-
 type AfterCreate interface {
-	SetObjectInDomAfterCreate(data ...map[string]string) error
+	SetObjectInDomAfterCreate(data ...map[string]string) (err string)
 }
 
 type AfterRead interface {
-	SetObjectInDomAfterRead(data ...map[string]string) error
+	SetObjectInDomAfterRead(data ...map[string]string) (err string)
 }
 
 type AfterUpdate interface {
-	SetObjectInDomAfterUpdate(data ...map[string]string) error
+	SetObjectInDomAfterUpdate(data ...map[string]string) (err string)
 }
 
 type AfterDelete interface {
-	SetObjectInDomAfterDelete(data ...map[string]string) error
+	SetObjectInDomAfterDelete(data ...map[string]string) (err string)
 }
 
 type AfterClicked interface {
@@ -63,6 +59,3 @@ type ContainerViewAdapter interface {
 type ItemViewAdapter interface {
 	BuildItemsView(all_data ...map[string]string) (html string)
 }
-
-// container_id ej: "contenedor-objeto"
-// tags ej: <div>objeto...</div>

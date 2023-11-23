@@ -3,7 +3,7 @@ package model
 type ObjectsHandler interface {
 	AddObjects(o ...*Object)
 	GetObjects() []*Object
-	GetObjectByName(object_name string) (*Object, error)
+	GetObjectByName(object_name string) (o *Object, err string)
 }
 
 func (h *Handlers) AddObjects(new_objects ...*Object) {
@@ -24,18 +24,18 @@ func (h Handlers) GetObjects() []*Object {
 	return h.objects
 }
 
-func (h Handlers) GetObjectByName(object_name string) (*Object, error) {
+func (h Handlers) GetObjectByName(object_name string) (o *Object, err string) {
 	// d.Log("total objetos:", len(d.objects))
 	if object_name == "" {
-		return nil, Error("error GetObjectByName nombre objeto no puede estar vació")
+		return nil, "error GetObjectByName nombre objeto no puede estar vació"
 	}
 
 	for _, o := range h.objects {
 		// d.Log("BUSCANDO OBJETO:", o.ObjectName)
 		if o.ObjectName == object_name {
-			return o, nil
+			return o, ""
 		}
 	}
 
-	return nil, Error("objeto:", object_name, "no encontrado")
+	return nil, "objeto: " + object_name + " no encontrado"
 }
