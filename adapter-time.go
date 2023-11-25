@@ -4,6 +4,12 @@ type TimeAdapter interface {
 	TimeNow
 	TimeWeek
 	UnixTimeHandler
+
+	//esperar en milliseconds ej: 500, 2000 ..
+	WaitFor(milliseconds int, callback func())
+
+	// new_date ej: 2003-11-22 o "" para volver al estado normal
+	SetDate(new_date string)
 }
 
 type TimeNow interface {

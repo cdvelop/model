@@ -1,5 +1,10 @@
 package model
 
+type Responses struct {
+	NoCut []Response    // normal
+	Cut   []CutResponse // recortada
+}
+
 type Response struct {
 	Action  string              `json:"a,omitempty"` //acción a realizar con la solicitud: create, read, update, delete o error
 	Object  string              `json:"o,omitempty"` //nombre de la tabla u objeto controlador hacia donde va la solicitud

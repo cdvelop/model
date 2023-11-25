@@ -28,6 +28,4 @@ type Module struct {
 	Inputs []*Input
 
 	*Handlers
-
-	Tests []Response
 }
