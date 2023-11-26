@@ -1,8 +1,8 @@
 package model
 
 type Responses struct {
-	NoCut []Response    // normal
-	Cut   []CutResponse // recortada
+	NoCut []Response    `json:"n,omitempty"` // normal
+	Cut   []CutResponse `json:"c,omitempty"` //re cortada
 }
 
 type Response struct {
@@ -15,8 +15,8 @@ type Response struct {
 type CutResponse struct {
 	//Action,Object,Module,Message
 	//ej: ["create","user","ModuleUsers","ok"]
-	CutOptions []string  `json:"o"`
-	CutData    []CutData `json:"d"`
+	CutOptions []string  `json:"o,omitempty"`
+	CutData    []CutData `json:"d,omitempty"`
 }
 
 type CutData struct {

@@ -1,8 +1,9 @@
 package model
 
 type Handlers struct {
-	ProductionMode bool
-	FileRootFolder string // default "app_files"
+	ProductionMode    bool
+	FrontendExecution bool
+	FileRootFolder    string // default "app_files"
 	AppInfo
 	AuthAdapter
 
