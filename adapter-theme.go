@@ -10,11 +10,26 @@ type ThemeAdapter interface {
 
 	ModuleClassName() string //ej: slider_panel
 
-	ModuleTemplate(m *Module, form *Object, list ContainerViewAdapter) string
+	ModuleTemplate(*TemplateModuleConfig) string
 
 	FunctionMessageName() string // ej: ShowMessageToUser
 	// ej query: "div#"+o.ModuleName+" [data-id='"+o.ObjectName+"']"
 	QuerySelectorMenuModule(module_name string) string
 	QuerySelectorModule(module_name string) string
 	QuerySelectorObject(module_name, object_name string) string
+}
+
+type TemplateModuleConfig struct {
+	Module *Module
+	// ej:	`<div class="target-module">
+	// 	<select name="select">
+	// 		<option value="value1">Value 1</option>
+	// 		<option value="value2" selected>Value 2</option>
+	// 	</select>
+	// </div>`
+	HeaderInputTarget string
+	Form              *Object
+	AsideList         ContainerViewAdapter
+	ButtonLogin       bool
+	ButtonPrint       bool
 }

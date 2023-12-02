@@ -23,3 +23,16 @@ func (m *Module) AddInputs(new_inputs []*Input, from string) (err string) {
 
 	return ""
 }
+
+func (m Module) ModuleSupports(area string) bool {
+
+	if len(m.Areas) != 0 { // hay areas definidas
+		// si no lo soporta continuamos a la siguiente
+		if _, supports := m.Areas[area]; !supports {
+			return false
+		}
+
+	}
+
+	return true
+}

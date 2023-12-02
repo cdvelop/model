@@ -26,6 +26,4 @@ type Handlers struct {
 
 	MessageAdapter
 	Logger
-
-	TestAdapter
 }

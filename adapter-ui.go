@@ -1,9 +1,5 @@
 package model
 
-type UI interface {
-	UserInterface(options ...string) string
-}
-
 type FrontendHandler struct {
 	AfterCreate
 	AfterRead
@@ -17,6 +13,8 @@ type FrontendHandler struct {
 	ViewAdapter
 
 	ResetViewObjectAdapter
+
+	NotifyFormComplete
 }
 
 type AfterCreate interface {
@@ -58,4 +56,8 @@ type ContainerViewAdapter interface {
 
 type ItemViewAdapter interface {
 	BuildItemsView(all_data ...map[string]string) (html string)
+}
+
+type NotifyFormComplete interface {
+	NotifyFormIsOK()
 }

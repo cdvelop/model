@@ -23,5 +23,9 @@ type Page struct {
 
 	// JsonBootActions string //index ej <meta name="JsonBootActions" content="{{.JsonBootActions}}">
 	// JsonBootTests   string
-	BootActions
+	BootPageData
+}
+
+type BootPageData struct {
+	JsonBootActions string
 }

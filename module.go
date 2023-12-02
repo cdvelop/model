@@ -11,16 +11,8 @@ type Module struct {
 	//interfaz usuario modulo
 	UI
 
-	// ej:	`<div class="target-module">
-	// 	<select name="select">
-	// 		<option value="value1">Value 1</option>
-	// 		<option value="value2" selected>Value 2</option>
-	// 	</select>
-	// </div>`
-	HeaderInputTarget string
-
 	//areas soportadas por el modulo ej: 'a','t','x'
-	Areas []byte
+	Areas map[string]string
 	// objetos o componentes que contiene el modulo ej: patient,user,datalist,search....
 	Objects []*Object
 
@@ -28,4 +20,8 @@ type Module struct {
 	Inputs []*Input
 
 	*Handlers
+}
+
+type UI interface {
+	UserInterface(options ...string) string
 }

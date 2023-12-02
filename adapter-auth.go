@@ -14,3 +14,7 @@ type LoginUser interface {
 	// params ej: r *http
 	GetLoginUser(params any) (u *User, err string)
 }
+
+type UserSession interface {
+	GetSessionEncode(result func(session_encode string))
+}

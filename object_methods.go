@@ -53,25 +53,9 @@ func (o Object) GetFieldsByNames(required_names ...string) (fiels_out []Field, e
 func (o Object) RenderFields() (fiels_out []Field) {
 	for _, field := range o.Fields {
 		if !field.NotRenderHtml && field.Input != nil {
-			fiels_out = append(fiels_out, field)
-		}
-	}
-	return
-}
-
-func (o Object) FieldsToFormValidate() (fiels_out []Field) {
-	for _, field := range o.Fields {
-		if !field.NotRenderHtml && field.Input != nil && field.SourceTable == "" {
-			fiels_out = append(fiels_out, field)
-		}
-	}
-	return
-}
-
-func (o Object) RequiredFields() (fiels_out []Field) {
-	for _, field := range o.Fields {
-		if !field.SkipCompletionAllowed {
-			fiels_out = append(fiels_out, field)
+			if field.Input.HtmlName() != "hidden" {
+				fiels_out = append(fiels_out, field)
+			}
 		}
 	}
 	return

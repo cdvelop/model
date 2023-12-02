@@ -14,9 +14,10 @@ type Field struct {
 
 	SkipCompletionAllowed bool //se permite que el campo no este completado. por defecto siempre sera requerido
 
-	Unique          bool //campo único e inalterable en db
-	NotRequiredInDB bool // campo no requerido en base de datos al crear tabla
-	Encrypted       bool // si estará encriptado su almacenamiento o no
+	Unique                   bool //campo único e inalterable en db
+	NotRequiredInDB          bool // campo no requerido en base de datos al crear tabla
+	Encrypted                bool // si estará encriptado su almacenamiento o no
+	NotClearValueOnFormReset bool // no borrar el valor del campo al resetear el formulario
 }
 
 func (f Field) IsPrimaryKey(o *Object) bool {
