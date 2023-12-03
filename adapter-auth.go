@@ -1,6 +1,7 @@
 package model
 
 type AuthAdapter interface {
+	NameOfAuthHandler() string
 	UserAuthNumber
 	LoginUser
 }
@@ -16,5 +17,5 @@ type LoginUser interface {
 }
 
 type UserSession interface {
-	GetSessionEncode(result func(session_encode string))
+	GetEncryptedSession(result func(session string))
 }

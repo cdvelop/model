@@ -30,4 +30,5 @@ type DataBaseAdapter interface {
 	CreateTablesInDB(objects []*Object, result func(err string))
 
 	BackupDataBase(callback func(err string))
+	ClearAllTableDataInDB(tables ...string) (err string)
 }
