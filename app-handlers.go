@@ -4,7 +4,6 @@ type Handlers struct {
 	ProductionMode    bool
 	FrontendExecution bool
 	FileRootFolder    string // default "app_files"
-	EncryptionKey     string // llave de cifrado general
 	AppInfo
 	AuthAdapter
 
@@ -19,12 +18,16 @@ type Handlers struct {
 	FormAdapter
 	HtmlAdapter
 
-	FetchAdapter
+	CipherAdapter
 	DataConverter
+	FetchAdapter
 
 	FileApi
 	FileDiskRW
 
 	MessageAdapter
 	Logger
+
+	BackendBootDataUser
+	FrontendBootDataUser
 }
