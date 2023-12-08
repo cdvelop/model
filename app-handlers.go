@@ -5,7 +5,9 @@ type Handlers struct {
 	FrontendExecution bool
 	FileRootFolder    string // default "app_files"
 	AppInfo
-	AuthAdapter
+
+	AuthFrontendAdapter
+	AuthBackendAdapter
 
 	modules []*Module
 	objects []*Object

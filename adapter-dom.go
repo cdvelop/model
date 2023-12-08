@@ -1,6 +1,7 @@
 package model
 
 type DomAdapter interface {
+	BuildFrontendUI() (err string)
 	InnerHTML(html_content string, o *Object)
 	InsertAfterBegin(html_content string, o *Object)
 	InsertBeforeEnd(html_content string, o *Object)

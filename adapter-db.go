@@ -4,6 +4,23 @@ type IdHandler interface {
 	GetNewID() string
 }
 
+type ReadParams struct {
+	FROM_TABLE      string
+	ID              string   // unique search
+	WHERE           []string //
+	SEARCH_ARGUMENT string
+	ORDER_BY        string
+	SORT_DESC       bool //default ASC
+	RETURN_ANY      bool // default string return []map[string]string, any = []map[string]interface{}
+
+}
+
+type ReadResult struct {
+	DataString []map[string]string
+	DataAny    []map[string]any
+	Error      string
+}
+
 type DataBaseAdapter interface {
 	IdHandler
 	RunOnClientDB() bool //verdadero corren en el cliente ej browser. por defecto falso corre en el servidor
@@ -18,11 +35,10 @@ type DataBaseAdapter interface {
 	// WHERE: "patient.id_patient = reservation.id_patient AND reservation.id_staff = '2'"
 	// ARGS: "1,4,33"
 	// }
-	ReadObjectsInDB(from_tables string, params ...map[string]string) (result []map[string]string, err string)
+	ReadSyncDataDB(from_tables string, params ...map[string]string) (result []map[string]string, err string)
 	//params: callback fun ej: fun([]map[string]string,error)
 	// "ORDER_BY": "patient_name", "SORT":"DESC" DEFAULT "ASC"
-	ReadStringDataAsyncInDB(r ReadDBParams, callback func(result []map[string]string, err string))
-	ReadAnyDataAsyncInDB(r ReadDBParams, callback func(result []map[string]interface{}, err string))
+	ReadAsyncDataDB(p ReadParams, callback func(r ReadResult))
 
 	UpdateObjectsInDB(table_name string, data ...map[string]string) (err string)
 	DeleteObjectsInDB(table_name string, data ...map[string]string) (err string)

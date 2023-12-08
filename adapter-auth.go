@@ -1,21 +1,22 @@
 package model
 
-type AuthAdapter interface {
+type AuthFrontendAdapter interface {
+	FrontendCheckUser(result func(u *User, err string))
+	AuthHandlerAdapter
+}
+
+type AuthBackendAdapter interface {
+	// params ej: r *http
+	BackendCheckUser(r_http any) (u *User, err string)
+	AuthHandlerAdapter
+}
+
+type AuthHandlerAdapter interface {
 	NameOfAuthHandler() string
 	UserAuthNumber
-	LoginUser
 }
 
-// ej: 1 or 2 or 34 or 400.....
 type UserAuthNumber interface {
+	// ej: 1 or 2 or 34 or 400.....
 	UserAuthNumber() (number string, err string)
-}
-
-type LoginUser interface {
-	// params ej: r *http
-	GetLoginUser(params any) (u *User, err string)
-}
-
-type UserSession interface {
-	GetEncryptedSession(result func(session string))
 }
