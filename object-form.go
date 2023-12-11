@@ -2,26 +2,27 @@ package model
 
 // setear valores del formulario
 func (o *Object) ResetFormValues(reset_input_view bool) (err string) {
-	const this = "ResetFormValues error "
-	if o.FormData == nil {
-		return this + "data formulario es nil"
-	}
+	if o.FormData != nil {
+		for _, field := range o.Fields {
 
-	for _, field := range o.Fields {
+			if _, exist := o.FormData[field.Name]; exist {
 
-		if _, exist := o.FormData[field.Name]; exist {
+				if !field.NotClearValueOnFormReset {
 
-			if !field.NotClearValueOnFormReset {
+					// seteamos el valor a ""
+					o.FormData[field.Name] = ""
 
-				// seteamos el valor a ""
-				o.FormData[field.Name] = ""
+					if reset_input_view {
 
-				if reset_input_view {
-					if field.Input.ResetViewAdapter != nil {
-						err = field.Input.ResetAdapterView()
-						if err != "" {
-							return this + field.Name + " " + err
+						if field.Input != nil {
+							if field.Input.ResetViewAdapter != nil {
+								err = field.Input.ResetAdapterView()
+								if err != "" {
+									return "ResetFormValues error " + field.Name + " " + err
+								}
+							}
 						}
+
 					}
 				}
 			}

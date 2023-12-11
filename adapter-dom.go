@@ -2,9 +2,9 @@ package model
 
 type DomAdapter interface {
 	BuildFrontendUI() (err string)
-	InnerHTML(html_content string, o *Object)
-	InsertAfterBegin(html_content string, o *Object)
-	InsertBeforeEnd(html_content string, o *Object)
+	InnerHTML(querySelector, html_content string) (err string)
+	InsertAfterBegin(querySelector, html_content string) (err string)
+	InsertBeforeEnd(querySelector, html_content string) (err string)
 	// querySelector ej: "a[name='xxx']"
 	ElementClicking(querySelector string) (err string)
 	//ej: querySelector "meta[name='JsonBootTests']"

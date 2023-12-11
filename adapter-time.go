@@ -13,8 +13,10 @@ type TimeAdapter interface {
 }
 
 type TimeNow interface {
-	// layout ej: 2006-01-02
-	ToDay(layout string) string
+	//ej: 2006-01-02
+	DateToDay() string
+	//ej: 2006-01-02 15:04:05
+	DateToDayHour() string
 }
 
 type TimeWeek interface {

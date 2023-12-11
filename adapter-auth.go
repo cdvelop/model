@@ -20,3 +20,22 @@ type UserAuthNumber interface {
 	// ej: 1 or 2 or 34 or 400.....
 	UserAuthNumber() (number string, err string)
 }
+
+type User struct {
+	Token          string // token de sesión solicitante
+	Id             string // id usuario
+	Ip             string
+	Name           string
+	Area           string // valor de carácter ej: a,s,p... key "" sin area
+	AreaName       string // nombre del area
+	AccessLevel    string // aquí valor numérico 0 a 255
+	LastConnection string //time.Time
+	// Packages       chan []Response
+}
+
+// default 2 minutes
+type CookieExpiration struct {
+	OneHour bool
+	OneDay  bool
+	Forever bool
+}

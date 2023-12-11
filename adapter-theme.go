@@ -17,6 +17,8 @@ type ThemeAdapter interface {
 	QuerySelectorMenuModule(module_name string) string
 	QuerySelectorModule(module_name string) string
 	QuerySelectorObject(module_name, object_name string) string
+	QuerySelectorUserName() string
+	QuerySelectorUserArea() string
 }
 
 type TemplateModuleConfig struct {

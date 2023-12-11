@@ -9,6 +9,9 @@ type Handlers struct {
 	AuthFrontendAdapter
 	AuthBackendAdapter
 
+	BackendBootDataUser
+	FrontendBootDataUser
+
 	modules []*Module
 	objects []*Object
 
@@ -29,7 +32,4 @@ type Handlers struct {
 
 	MessageAdapter
 	Logger
-
-	BackendBootDataUser
-	FrontendBootDataUser
 }
