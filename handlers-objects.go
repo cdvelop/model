@@ -25,10 +25,10 @@ func (h Handlers) GetObjects() []*Object {
 }
 
 func (h Handlers) GetObjectByName(object_name string) (o *Object, err string) {
-	const t = "GetObjectByName error "
+	const t = "GetObjectByName objeto: "
 	// d.Log("total objetos:", len(d.objects))
 	if object_name == "" {
-		return nil, t + "nombre objeto no puede estar vació"
+		return nil, t + "nombre no puede estar vació"
 	}
 
 	for _, o := range h.objects {
@@ -38,5 +38,5 @@ func (h Handlers) GetObjectByName(object_name string) (o *Object, err string) {
 		}
 	}
 
-	return nil, t + "objeto: " + object_name + " no encontrado"
+	return nil, t + object_name + " no encontrado"
 }
