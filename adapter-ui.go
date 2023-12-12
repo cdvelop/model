@@ -12,8 +12,6 @@ type FrontendHandler struct {
 
 	ViewAdapter
 
-	ResetViewAdapter
-
 	NotifyFormComplete
 }
 
