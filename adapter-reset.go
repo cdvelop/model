@@ -8,6 +8,6 @@ type ResetViewHandlerObjectAdapter interface {
 	ResetViewHandlerObject() (err string)
 }
 
-type ResetInputViewAdapter interface {
-	ResetInputView() (err string)
+type ResetParameters struct {
+	CallJsFunWithParameters
 }

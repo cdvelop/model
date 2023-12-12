@@ -36,3 +36,18 @@ func (m Module) ModuleSupports(area string) bool {
 
 	return true
 }
+
+func (m Module) ResetFrontendStateObjects() {
+
+	for _, o := range m.Objects {
+		// m.Log("info reset Object:", o.ObjectName)
+		if o.FrontHandler.ResetFrontendObjectStateAdapter != nil {
+			// m.Log("ok ResetFrontendObjectState:", o.ObjectName)
+			m.Log(o.FrontHandler.ResetFrontendObjectState())
+		}
+
+		if o.FrontHandler.ObjectViewHandler != nil {
+			m.Log(o.FrontHandler.ResetViewHandlerObject())
+		}
+	}
+}
