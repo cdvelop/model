@@ -31,6 +31,9 @@ type User struct {
 	AreaName       string // nombre del area
 	AccessLevel    string // aquí valor numérico 0 a 255
 	LastConnection string //time.Time
+
+	R any //r *http.Request.
+	W any //w http.ResponseWriter
 	// Packages       chan []Response
 }
 
