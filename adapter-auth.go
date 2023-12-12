@@ -2,6 +2,7 @@ package model
 
 type AuthFrontendAdapter interface {
 	FrontendCheckUser(result func(u *User, err string))
+	HeaderAuthenticationAdapter
 	AuthHandlerAdapter
 }
 
