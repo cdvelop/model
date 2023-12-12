@@ -34,7 +34,6 @@ type User struct {
 
 	R any //r *http.Request.
 	W any //w http.ResponseWriter
-	// Packages       chan []Response
 }
 
 type HeaderAuthenticationAdapter interface {

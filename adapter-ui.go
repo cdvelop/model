@@ -12,7 +12,7 @@ type FrontendHandler struct {
 
 	ViewAdapter
 
-	ResetViewObjectAdapter
+	ResetViewAdapter
 
 	NotifyFormComplete
 }

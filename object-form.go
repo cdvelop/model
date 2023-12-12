@@ -15,6 +15,7 @@ func (o *Object) ResetFormValues(reset_input_view bool) (err string) {
 					if reset_input_view {
 
 						if field.Input != nil {
+							o.Log("ok reset", field.Name, field.InputName)
 							if field.Input.ResetViewAdapter != nil {
 								err = field.Input.ResetAdapterView()
 								if err != "" {
