@@ -33,6 +33,10 @@ type User struct {
 	// Packages       chan []Response
 }
 
+type HeaderAuthenticationAdapter interface {
+	AddHeaderAuthentication() Header
+}
+
 // default 2 minutes
 type CookieExpiration struct {
 	OneHour bool
