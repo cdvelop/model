@@ -10,7 +10,9 @@ type FrontendHandler struct {
 
 	NotifyBootData
 
-	ViewAdapter
+	ObjectViewHandler
+
+	ResetFrontendObjectStateAdapter
 
 	NotifyFormComplete
 }
@@ -40,11 +42,11 @@ type NotifyBootData interface {
 	NotifyBootDataIsLoaded()
 }
 
-type ViewAdapter interface {
+type ObjectViewHandler interface {
 	NameViewAdapter() string
 	ContainerViewAdapter
 	ItemViewAdapter
-	ResetViewAdapter
+	ResetViewHandlerObjectAdapter
 }
 
 // todo el contenido html por defecto del objeto

@@ -34,8 +34,8 @@ func (o Object) ClickingID(id string) (err string) {
 		return e
 	}
 
-	if o.FrontHandler.ViewAdapter == nil {
-		return "error objeto " + o.ObjectName + " no tiene controlador ViewAdapter para realizar click"
+	if o.FrontHandler.ObjectViewHandler == nil {
+		return "error objeto " + o.ObjectName + " no tiene controlador ObjectViewHandler para realizar click"
 	}
 
 	return o.CallFunction(o.FrontHandler.NameViewAdapter()+"ObjectClicking", module_html, id)

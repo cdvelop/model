@@ -10,7 +10,7 @@ type Input struct {
 
 	Tag
 	ItemViewAdapter
-	ResetViewAdapter
+	ResetInputViewAdapter
 	Validate
 
 	TestData

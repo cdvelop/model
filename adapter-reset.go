@@ -1,5 +1,13 @@
 package model
 
-type ResetViewAdapter interface {
-	ResetAdapterView() (err string)
+type ResetFrontendObjectStateAdapter interface {
+	ResetFrontendObjectState() (err string)
+}
+
+type ResetViewHandlerObjectAdapter interface {
+	ResetViewHandlerObject() (err string)
+}
+
+type ResetInputViewAdapter interface {
+	ResetInputView() (err string)
 }
