@@ -5,5 +5,5 @@ type BackendBootDataUser interface {
 }
 
 type FrontendBootDataUser interface {
-	FrontendLoadBootData(data string) (err string)
+	FrontendLoadHtmlBootData(data string) (err string)
 }

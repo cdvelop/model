@@ -47,7 +47,8 @@ func (m Module) ResetFrontendStateObjects() {
 		}
 
 		if o.FrontHandler.ObjectViewHandler != nil {
-			m.Log(o.FrontHandler.ResetViewHandlerObject())
+			// m.Log("ResetViewHandlerObject:", o.ObjectName)
+			m.Log(o.FrontHandler.ObjectViewHandler.ResetViewHandlerObject())
 		}
 	}
 }

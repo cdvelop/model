@@ -9,7 +9,8 @@ type DomAdapter interface {
 	ElementClicking(querySelector string) (err string)
 	//ej: querySelector "meta[name='JsonBootTests']"
 	// get_content: "content"
-	SelectContent(querySelector, get_content string) (content, err string)
+	// set_after true = element.Set("content", "")
+	SelectContent(querySelector, get_content string, set_after bool) (content, err string)
 
 	CallFunction(functionName string, args ...any) (err string)
 }
