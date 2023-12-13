@@ -25,7 +25,3 @@ type Page struct {
 	// JsonBootTests   string
 	BootPageData
 }
-
-type BootPageData struct {
-	JsonBootActions string
-}

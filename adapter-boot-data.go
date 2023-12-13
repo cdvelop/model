@@ -1,7 +1,11 @@
 package model
 
+type BootPageData struct {
+	JsonBootActions string
+}
+
 type BackendBootDataUser interface {
-	BackendLoadBootData(u *User) (out, err string)
+	BackendLoadBootData(u *User) BootPageData
 }
 
 type FrontendBootDataUser interface {
