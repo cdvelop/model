@@ -14,7 +14,7 @@ func (h Handlers) CheckInterfaces(pkg_name string, struct_in interface{}) (err s
 	for _, name := range names {
 		for _, n := range nils {
 			if name == n {
-				return this + "en" + pkg_name + "handler nil: " + name
+				return this + "en " + pkg_name + "handler nil: " + name
 			}
 		}
 	}
