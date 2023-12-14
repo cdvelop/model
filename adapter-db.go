@@ -1,7 +1,7 @@
 package model
 
 type IdHandler interface {
-	GetNewID() string
+	GetNewID() (id, err string)
 }
 
 type ReadParams struct {
