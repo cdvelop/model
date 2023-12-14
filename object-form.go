@@ -20,11 +20,11 @@ func (o *Object) ResetFormValues(form_jsValue any, reset_input_view bool) (err s
 							// o.Log("ok reset", field.Name, field.InputName)
 							if field.Input.ResetParameters != nil {
 
-								field.Input.ResetParameters.AddParams["form"] = form_jsValue
+								field.Input.ResetParameters.Params["form"] = form_jsValue
 
-								field.Input.ResetParameters.AddParams["field_name"] = field.Name
+								field.Input.ResetParameters.Params["field_name"] = field.Name
 
-								o.Log(field.Input.ExecuteJsFun(o))
+								o.Log(field.Input.CallWithEnableAndQueryParams(o))
 
 							}
 						}

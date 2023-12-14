@@ -1,27 +1,26 @@
 package model
 
-type CallJsFunWithParameters struct {
-	FuncNameCall string         // función a llamar
-	Enable       bool           // estado por defecto a enviar
-	AddParams    map[string]any // parámetros adicionales
+type CallJsOptions struct {
+	NameJsFunc      string
+	Enable          bool //parámetro estado por defecto a enviar
+	SendQueryObject bool // envía querySelector Objeto
 
-	all_params map[string]any // uso interno
+	Params map[string]any // parámetros
+
+	ResultInt    bool // resultado en formato int
+	ResultString bool // resultado en string
 }
 
-func (c *CallJsFunWithParameters) ExecuteJsFun(o *Object) (err string) {
-	// Crear el mapa que contendrá todos los parámetros
-	c.all_params = make(map[string]interface{})
+// enviar con parámetros enable y query del objeto
+func (c CallJsOptions) CallWithEnableAndQueryParams(o *Object) (result any, err string) {
 
 	// Añadir los parámetros específicos de la función
-	c.all_params["enable"] = c.Enable
-	c.all_params["query"] = o.QuerySelectorObject(o.ModuleName, o.ObjectName)
+	c.Params["enable"] = c.Enable
 
-	// Añadir los parámetros adicionales proporcionados por el usuario
-	for key, value := range c.AddParams {
-		c.all_params[key] = value
+	if c.SendQueryObject {
+		c.Params["query"] = o.QuerySelectorObject(o.ModuleName, o.ObjectName)
 	}
 
-	// Llamar a la función JavaScript
-	return o.CallFunction(c.FuncNameCall, c.all_params)
+	return o.CallFunction(c.NameJsFunc, c)
 
 }

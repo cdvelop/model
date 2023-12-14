@@ -9,5 +9,5 @@ type ResetViewHandlerObjectAdapter interface {
 }
 
 type ResetParameters struct {
-	CallJsFunWithParameters
+	CallJsOptions
 }
