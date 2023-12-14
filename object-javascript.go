@@ -30,7 +30,7 @@ func (o Object) CountViewElements() (total int, err string) {
 	fn := CallJsOptions{
 		NameJsFunc:      o.FrontHandler.NameViewAdapter() + "ObjectCount",
 		Enable:          false,
-		SendQueryObject: false,
+		SendQueryObject: true,
 		Params:          map[string]any{},
 		ResultInt:       true,
 		ResultString:    false,
@@ -40,8 +40,6 @@ func (o Object) CountViewElements() (total int, err string) {
 	if err != "" {
 		return 0, t + err
 	}
-
-	o.Log("RETORNO:", js_value)
 
 	var ok bool
 	total, ok = js_value.(int)

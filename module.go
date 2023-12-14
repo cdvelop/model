@@ -23,5 +23,5 @@ type Module struct {
 }
 
 type UI interface {
-	UserInterface(options ...string) string
+	UserInterface(u *User) string
 }
