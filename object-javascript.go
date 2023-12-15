@@ -22,10 +22,6 @@ func (o Object) ClickingID(id string) (err string) {
 
 func (o Object) CountViewElements() (total int, err string) {
 	const t = "CountViewElements "
-	js_value, err := o.CheckModuleHtml()
-	if err != "" {
-		return 0, t + err + " para contar elementos"
-	}
 
 	fn := CallJsOptions{
 		NameJsFunc:      o.FrontHandler.NameViewAdapter() + "ObjectCount",
@@ -36,7 +32,7 @@ func (o Object) CountViewElements() (total int, err string) {
 		ResultString:    false,
 	}
 
-	js_value, err = fn.CallWithEnableAndQueryParams(&o)
+	js_value, err := fn.CallWithEnableAndQueryParams(&o)
 	if err != "" {
 		return 0, t + err
 	}
