@@ -5,8 +5,8 @@ type IdHandler interface {
 }
 
 type ReadParams struct {
-	FROM_TABLES string //ej: "users,products" or: public.reservation, public.patient"
-	SELECT      string // "name, phone, address" default *
+	FROM_TABLE string //ej: "users,products" or: public.reservation, public.patient"
+	SELECT     string // "name, phone, address" default *
 
 	ID              string   // unique search (usado en indexdb)
 	SEARCH_ARGUMENT string   //"1,4,33"
@@ -17,7 +17,6 @@ type ReadParams struct {
 	LIMIT     int    // 10, 5, 100. note: Postgres y MySQL: "LIMIT 10", SQLite: "LIMIT 10 OFFSET 0" OR "" no limit
 
 	RETURN_ANY bool // default string return []map[string]string, any = []map[string]interface{}
-	RETURN_INT bool //retornar resultado de la consulta en la variable DataInt
 }
 
 type ReadResults struct {
@@ -32,7 +31,7 @@ type DataBaseAdapter interface {
 	// items support in server db: []map[string]string, map[string]string
 	CreateObjectsInDB(table_name string, backup_required bool, items any) (err string)
 
-	ReadSyncDataDB(p ReadParams) (r ReadResults, err string)
+	ReadSyncDataDB(p ReadParams, params ...any) (result []map[string]string, err string)
 	ReadAsyncDataDB(p ReadParams, callback func(r ReadResults, err string))
 
 	UpdateObjectsInDB(table_name string, data ...map[string]string) (err string)
