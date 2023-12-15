@@ -24,7 +24,7 @@ type UserAuthNumber interface {
 
 type User struct {
 	Token          string // token de sesión solicitante
-	Number         string // numero correlativo de usuario
+	SessionNumber  string // numero correlativo session usuario ej: 1,5...
 	Id             string // id usuario
 	Ip             string
 	Name           string
