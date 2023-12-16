@@ -1,5 +1,7 @@
 package model
 
+const PREFIX_ID_NAME = "id_"
+
 type IdHandler interface {
 	GetNewID() (id, err string)
 }
@@ -8,9 +10,10 @@ type ReadParams struct {
 	FROM_TABLE string //ej: "users,products" or: public.reservation, public.patient"
 	SELECT     string // "name, phone, address" default *
 
-	ID              string   // unique search (usado en indexdb)
-	SEARCH_ARGUMENT string   //"1,4,33"
-	WHERE           []string //"patient.id_patient=reservation.id_patient, (AND) reservation.id_staff = '2'"
+	WHERE         []map[string]string //ej: "patient.id_patient=reservation.id_patient, (OR) reservation.id_staff = '2'"
+	AND_CONDITION bool                // OR default se agrega AND si es true
+
+	ID string // unique search (usado en indexdb)
 
 	ORDER_BY  string // name,phone,address
 	SORT_DESC bool   //default ASC
@@ -22,7 +25,6 @@ type ReadParams struct {
 type ReadResults struct {
 	ResultsString []map[string]string
 	ResultsAny    []map[string]any
-	DataInt       int
 }
 
 type DataBaseAdapter interface {
@@ -32,7 +34,7 @@ type DataBaseAdapter interface {
 	CreateObjectsInDB(table_name string, backup_required bool, items any) (err string)
 
 	ReadSyncDataDB(p ReadParams, data ...map[string]string) (result []map[string]string, err string)
-	ReadAsyncDataDB(p ReadParams, callback func(r ReadResults, err string))
+	ReadAsyncDataDB(p ReadParams, callback func(r *ReadResults, err string))
 
 	UpdateObjectsInDB(table_name string, data ...map[string]string) (err string)
 	DeleteObjectsInDB(table_name string, data ...map[string]string) (err string)

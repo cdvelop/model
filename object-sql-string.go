@@ -48,28 +48,6 @@ func (o Object) OnlyRequiredDbFieldsThisObject() (db_field []Field) {
 	return
 }
 
-// ej: reservation.id_patient = patient.id_patient AND reservation.id_staff = '1635574887' AND reservation.reservation_day = '29'
-func (o Object) Where(data map[string]string) (out string) {
-	var and string
-
-	for k, v := range data {
-
-		value := `'` + v + `'`
-
-		for _, table := range o.GetTablesNames() {
-			if table+"."+PREFIX_ID_NAME+table == v {
-				value = v
-			}
-		}
-
-		out += and + o.Table + `.` + k + ` = ` + value
-
-		and = ` AND `
-	}
-
-	return
-}
-
 func (o Object) GetTablesNames() (out []string) {
 
 	out = append(out, o.Table)

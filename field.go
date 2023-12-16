@@ -1,7 +1,5 @@
 package model
 
-const PREFIX_ID_NAME = "id_"
-
 type Field struct {
 	// si el campo comienza com id_ se considera como único y perteneciente a una tabla específica ej: id_user su tabla es user
 	// otros ej: id_usuario, apellido, address, city etc
