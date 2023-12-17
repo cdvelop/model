@@ -1,5 +1,61 @@
 package model
 
+func (m *Module) AddObjectsToModule(new_objects ...*Object) {
+
+	for _, new := range new_objects {
+		exists := false
+		for _, o := range m.Objects {
+			if o.ObjectName == new.ObjectName {
+				exists = true
+				break
+			}
+		}
+
+		if !exists {
+			m.Objects = append(m.Objects, new)
+		}
+	}
+}
+
+// obtener todos los objetos del modulo
+func (m Module) GetObjectFromModule(object_name string) (o *Object, err string) {
+	const e = " func GetObjectFromModule"
+
+	if object_name == "" {
+		return nil, "nombre no puede estar vació" + e
+	}
+
+	for _, o := range m.Objects {
+		// d.Log("BUSCANDO OBJETO:", o.ObjectName)
+		if o.ObjectName == object_name {
+			return o, ""
+		}
+	}
+
+	return nil, object_name + " no encontrado" + e
+}
+
+// actualizar este objeto como en uso actualmente en el modulo
+func (o *Object) SetActualObject() (err string) {
+	return o.Module.SetActualModuleObject(o.ObjectName)
+}
+
+// actualizar objeto en uso actualmente en el modulo
+func (m *Module) SetActualModuleObject(object_name string) (err string) {
+	m.object_actual, err = m.GetObjectFromModule(object_name)
+	return
+}
+
+// obtener objeto en uso actualmente en el modulo
+func (m *Module) GetActualModuleObject() (o *Object, err string) {
+
+	if m.object_actual == nil {
+		return nil, "objecto actual no definido func GetActualModuleObject"
+	}
+
+	return m.object_actual, ""
+}
+
 // from ej: file, user
 func (m *Module) AddInputs(new_inputs []*Input, from string) (err string) {
 	for _, new := range new_inputs {

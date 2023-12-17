@@ -35,7 +35,7 @@ type AfterDelete interface {
 
 type AfterClicked interface {
 	// data del objeto que fue cliqueado por el usuario
-	UserClicked(data map[string]string)
+	UserHasClickedObject()
 }
 
 type NotifyBootData interface {

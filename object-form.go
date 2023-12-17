@@ -24,7 +24,10 @@ func (o *Object) ResetFormValues(form_jsValue any, reset_input_view bool) (err s
 
 								field.Input.ResetParameters.Params["field_name"] = field.Name
 
-								o.Log(field.Input.CallWithEnableAndQueryParams(o))
+								_, err := field.Input.CallWithEnableAndQueryParams(o)
+								if err != "" {
+									o.Log("ResetFormValues", field.Name, "input:", field.Input.InputName, "error:", err)
+								}
 
 							}
 						}

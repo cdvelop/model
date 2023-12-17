@@ -8,14 +8,32 @@ func (o Object) ClickMenuModule() (err string) {
 	return o.ElementClicking(o.QuerySelectorMenuModule(o.ModuleName))
 }
 
-func (o Object) ClickingID(id string) (err string) {
+// si no se proporciona id_param se buscara en el formulario actual del objeto
+func (o Object) ClickingID(id_param ...string) (err string) {
+	const e = " func ClickingID"
+	var id string
+
+	for _, v := range id_param {
+		id = v
+	}
+
+	if id == "" { // no se proporciono id lo buscamos en el formulario
+
+		id, err = o.GetID()
+		if err != "" {
+			return err + e
+		}
+	}
 
 	module_html, err := o.CheckModuleHtml()
 	if err != "" {
-		return "ClickingID " + err + " para realizar click"
+		return err + e
 	}
 
 	_, err = o.CallFunction(o.FrontHandler.NameViewAdapter()+"ObjectClicking", module_html, id)
+	if err != "" {
+		return err + e
+	}
 
 	return
 }
@@ -24,12 +42,12 @@ func (o Object) CountViewElements() (total int, err string) {
 	const t = "CountViewElements "
 
 	fn := CallJsOptions{
-		NameJsFunc:      o.FrontHandler.NameViewAdapter() + "ObjectCount",
-		Enable:          false,
-		SendQueryObject: true,
-		Params:          map[string]any{},
-		ResultInt:       true,
-		ResultString:    false,
+		NameJsFunc:         o.FrontHandler.NameViewAdapter() + "ObjectCount",
+		Enable:             false,
+		NotSendQueryObject: false,
+		Params:             map[string]any{},
+		ResultInt:          true,
+		ResultString:       false,
 	}
 
 	js_value, err := fn.CallWithEnableAndQueryParams(&o)

@@ -1,30 +1,28 @@
 package model
 
-type AuthFrontendAdapter interface {
+type SessionFrontendAdapter interface {
 	FrontendCheckUser(result func(u *User, err string))
-	HeaderAuthenticationAdapter
-	AuthHandlerAdapter
+	SessionHandlerAdapter
 }
 
-type AuthBackendAdapter interface {
+type SessionBackendAdapter interface {
 	// params ej: r *http
 	BackendCheckUser(r_http any) (u *User, err string)
-	AuthHandlerAdapter
+	SessionHandlerAdapter
 }
 
-type AuthHandlerAdapter interface {
-	NameOfAuthHandler() string
-	UserAuthNumber
+type SessionHandlerAdapter interface {
+	SessionHandlerName() string
+	UserSessionNumber
 }
 
-type UserAuthNumber interface {
+type UserSessionNumber interface {
 	// ej: 1 or 2 or 34 or 400.....
-	UserAuthNumber() (number string, err string)
+	UserSessionNumber() (number string, err string)
 }
 
 type User struct {
 	Token          string // token de sesión solicitante
-	SessionNumber  string // numero correlativo session usuario ej: 1,5...
 	Id             string // id usuario
 	Ip             string
 	Name           string
@@ -35,10 +33,6 @@ type User struct {
 
 	R any //r *http.Request.
 	W any //w http.ResponseWriter
-}
-
-type HeaderAuthenticationAdapter interface {
-	AddHeaderAuthentication() Header
 }
 
 // default 2 minutes

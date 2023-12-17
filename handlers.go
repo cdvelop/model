@@ -1,19 +1,19 @@
 package model
 
-type Handlers struct {
+type MainHandler struct {
 	ProductionMode    bool
 	FrontendExecution bool
 	FileRootFolder    string // default "app_files"
 	AppInfo
 
-	AuthFrontendAdapter
-	AuthBackendAdapter
+	SessionFrontendAdapter
+	SessionBackendAdapter
 
 	BackendBootDataUser
 	FrontendBootDataUser
 
-	modules []*Module
-	objects []*Object
+	Modules       []*Module
+	module_actual *Module
 
 	ThemeAdapter
 	DataBaseAdapter

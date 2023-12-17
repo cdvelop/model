@@ -1,9 +1,9 @@
 package model
 
 type CallJsOptions struct {
-	NameJsFunc      string
-	Enable          bool //parámetro estado por defecto a enviar
-	SendQueryObject bool // envía querySelector Objeto
+	NameJsFunc         string
+	Enable             bool //parámetro estado por defecto a enviar
+	NotSendQueryObject bool //no envía querySelector Objeto por defecto siempre se envía
 
 	Params map[string]any // parámetros
 
@@ -17,7 +17,7 @@ func (c CallJsOptions) CallWithEnableAndQueryParams(o *Object) (result any, err 
 	// Añadir los parámetros específicos de la función
 	c.Params["enable"] = c.Enable
 
-	if c.SendQueryObject {
+	if !c.NotSendQueryObject {
 		c.Params["query"] = o.QuerySelectorObject(o.ModuleName, o.ObjectName)
 	}
 

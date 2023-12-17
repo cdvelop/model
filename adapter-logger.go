@@ -1,6 +1,8 @@
 package model
 
 type Logger interface {
-	// retorno una interfaz solo para simplificar funciones de tipo syscall/js
-	Log(message ...any) interface{}
+	// pare usar Log en una lines en funciones de tipo syscall/js se usa interface{}
+	Log(message ...any) any
+
+	AddHandlerToRegisterLogsInDB(h *MainHandler)
 }

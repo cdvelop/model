@@ -75,13 +75,34 @@ func (o Object) FilterRemoveFields(namesToRemove ...string) (fiels_out []Field) 
 	return
 }
 
-func (o Object) GetID(data_search map[string]string) string {
+func (o Object) GetID() (id, err string) {
+	const e = " func GetID"
 
-	if id, found := data_search[o.PrimaryKeyName()]; found {
-		return id
+	err = o.FormCheck()
+	if err != "" {
+		return "", err + e
 	}
 
-	return "ERROR_NO_ID_" + o.Table
+	var ok bool
+	if id, ok = o.FormData[o.PrimaryKeyName()]; !ok || id == "" {
+		return "", "id no encontrado en el formulario del objeto:" + o.ObjectName + e
+	}
+
+	return id, ""
+}
+
+func (o Object) FormCheck() (err string) {
+	const e = " func FormCheck"
+
+	if o.FormData == nil {
+		return "formulario del objeto:" + o.ObjectName + " no definido (nil)" + e
+	}
+
+	if len(o.FormData) == 0 {
+		return "no hay elementos en el formulario del objeto:" + o.ObjectName + e
+	}
+
+	return
 }
 
 func (o Object) FieldExist(field_name string) (Field, bool) {

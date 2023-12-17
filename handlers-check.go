@@ -4,8 +4,8 @@ import (
 	"reflect"
 )
 
-func (h Handlers) CheckInterfaces(pkg_name string, struct_in interface{}) (err string) {
-	const this = "CheckInterfaces error "
+func (h MainHandler) CheckInterfaces(pkg_name string, struct_in interface{}) (err string) {
+	const e = "CheckInterfaces "
 	nils := h.getNilInterfaces()
 	// fmt.Println("NILS:", nils)
 	names := GetFieldNamesFrom(struct_in)
@@ -14,7 +14,7 @@ func (h Handlers) CheckInterfaces(pkg_name string, struct_in interface{}) (err s
 	for _, name := range names {
 		for _, n := range nils {
 			if name == n {
-				return this + "en " + pkg_name + "handler nil: " + name
+				return e + "en " + pkg_name + "handler nil: " + name
 			}
 		}
 	}
@@ -22,11 +22,11 @@ func (h Handlers) CheckInterfaces(pkg_name string, struct_in interface{}) (err s
 	return ""
 }
 
-func (h Handlers) getNilInterfaces() []string {
+func (h MainHandler) getNilInterfaces() []string {
 	var nullFields []string
-	// Obtener el valor reflect.Value de Handlers
+	// Obtener el valor reflect.Value de MainHandler
 	handlersValue := reflect.ValueOf(h)
-	// Iterar sobre los campos de Handlers
+	// Iterar sobre los campos de MainHandler
 	for i := 0; i < handlersValue.NumField(); i++ {
 		fieldValue := handlersValue.Field(i)
 		// Verificar si el campo es una interfaz es nula

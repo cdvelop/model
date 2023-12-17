@@ -1,7 +1,7 @@
 package model
 
 type FileApi interface {
-	// FileAddUploadApi(h *Handlers, source *Object, file_settings any) error
+	// FileAddUploadApi(h *MainHandler, source *Object, file_settings any) error
 	//backend file_request ej: r *http.Request, w http.ResponseWriter
 	//frontend file_request ej: blob file js.Value
 	FileUpload(object_name, area_file string, file_request ...any) (out []map[string]string, err string)
