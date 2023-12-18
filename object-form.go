@@ -1,7 +1,7 @@
 package model
 
-// setear valores del formulario
-func (o *Object) ResetFormValues(form_jsValue any, reset_input_view bool) (err string) {
+// setear valores del form data map del objeto y el estado de los inputs
+func (o *Object) ResetFormDataMapValuesAndInputs(form_jsValue any, reset_input_view bool) (err string) {
 	// o.Log("ok form data:", o.ObjectName, o.FormData)
 
 	if o.FormData != nil {
@@ -26,7 +26,7 @@ func (o *Object) ResetFormValues(form_jsValue any, reset_input_view bool) (err s
 
 								_, err := field.Input.CallWithEnableAndQueryParams(o)
 								if err != "" {
-									o.Log("ResetFormValues", field.Name, "input:", field.Input.InputName, "error:", err)
+									o.Log("ResetFormDataMapValuesAndInputs", field.Name, "input:", field.Input.InputName, "error:", err)
 								}
 
 							}

@@ -1,20 +1,6 @@
 package model
 
-type ModuleHandler interface {
-	AddModules(new_modules ...*Module)
-	GetModules() []*Module
-	GetModuleByName(module_name string) (m *Module, err string)
-
-	SetActualModuleInMainHandler(module_name string) (err string)
-	GetActualModuleFromMainHandler() (o *Module, err string)
-}
-
-type ObjectsHandler interface {
-	GetAllObjectsFromMainHandler() []*Object
-	GetObjectByNameMainHandler(object_name string) (o *Object, err string)
-}
-
-func (h MainHandler) GetAllObjectsFromMainHandler() (objects []*Object) {
+func (h MainHandler) MainHandlerGetAllObjects() (objects []*Object) {
 	for _, m := range h.Modules {
 		objects = append(objects, m.Objects...)
 	}
@@ -22,7 +8,7 @@ func (h MainHandler) GetAllObjectsFromMainHandler() (objects []*Object) {
 	return
 }
 
-func (h MainHandler) GetObjectByNameMainHandler(object_name string) (o *Object, err string) {
+func (h MainHandler) MainHandlerGetObjectByName(object_name string) (o *Object, err string) {
 	// d.Log("total objetos:", len(d.objects))
 
 	for _, m := range h.Modules {
@@ -33,14 +19,14 @@ func (h MainHandler) GetObjectByNameMainHandler(object_name string) (o *Object, 
 		}
 	}
 
-	return nil, object_name + " no encontrado func GetObjectByNameMainHandler"
+	return nil, object_name + " no encontrado func MainHandlerGetObjectByName"
 }
 
-func (h MainHandler) GetModules() []*Module {
+func (h MainHandler) MainHandlerGetModules() []*Module {
 	return h.Modules
 }
 
-func (h *MainHandler) AddModules(new_modules ...*Module) {
+func (h *MainHandler) MainHandlerAddModules(new_modules ...*Module) {
 
 	for _, new := range new_modules {
 		exists := false
@@ -57,10 +43,19 @@ func (h *MainHandler) AddModules(new_modules ...*Module) {
 	}
 }
 
-func (h *MainHandler) SetActualModuleInMainHandler(module_name string) (err string) {
+func (h *MainHandler) SetActualModule(module_name string) (err string) {
+
+	if h.module_actual != nil && h.module_actual.ModuleName == module_name {
+		return
+	}
+
 	h.module_actual, err = h.GetModuleByName(module_name)
 
 	return
+}
+
+func (h *MainHandler) SetActualObject(object_name string) (err string) {
+	return h.module_actual.setActualModuleObject(object_name)
 }
 
 func (h MainHandler) GetModuleByName(module_name string) (m *Module, err string) {

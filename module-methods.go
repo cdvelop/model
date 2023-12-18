@@ -36,12 +36,17 @@ func (m Module) GetObjectFromModule(object_name string) (o *Object, err string) 
 }
 
 // actualizar este objeto como en uso actualmente en el modulo
-func (o *Object) SetActualObject() (err string) {
-	return o.Module.SetActualModuleObject(o.ObjectName)
-}
+// func (o *Object) SetActualObject() (err string) {
+// 	return o.Module.setActualModuleObject(o.ObjectName)
+// }
 
 // actualizar objeto en uso actualmente en el modulo
-func (m *Module) SetActualModuleObject(object_name string) (err string) {
+func (m *Module) setActualModuleObject(object_name string) (err string) {
+
+	if m.object_actual != nil && m.object_actual.ObjectName == object_name {
+		return
+	}
+
 	m.object_actual, err = m.GetObjectFromModule(object_name)
 	return
 }
