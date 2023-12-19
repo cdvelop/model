@@ -12,8 +12,8 @@ type MainHandler struct {
 	BackendBootDataUser
 	FrontendBootDataUser
 
-	Modules       []*Module
-	module_actual *Module
+	modules []*Module // módulos agregados al sistema
+	ObjectHandlerAdapter
 
 	ThemeAdapter
 	DataBaseAdapter

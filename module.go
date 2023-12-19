@@ -12,7 +12,7 @@ type Module struct {
 	//areas soportadas por el modulo ej: 'a','t','x'
 	Areas map[string]string
 	// objetos o componentes que contiene el modulo ej: patient,user,datalist,search....
-	Objects []*Object
+	objects []*Object
 	// objeto en uso actualmente en el modulo
 	object_actual *Object
 	// tipo de entradas usadas en el modulo

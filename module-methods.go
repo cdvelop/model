@@ -4,7 +4,7 @@ func (m *Module) AddObjectsToModule(new_objects ...*Object) {
 
 	for _, new := range new_objects {
 		exists := false
-		for _, o := range m.Objects {
+		for _, o := range m.objects {
 			if o.ObjectName == new.ObjectName {
 				exists = true
 				break
@@ -12,43 +12,30 @@ func (m *Module) AddObjectsToModule(new_objects ...*Object) {
 		}
 
 		if !exists {
-			m.Objects = append(m.Objects, new)
+			m.objects = append(m.objects, new)
 		}
 	}
 }
+func (m Module) GetObjects() []*Object {
+	return m.objects
+}
 
 // obtener todos los objetos del modulo
-func (m Module) GetObjectFromModule(object_name string) (o *Object, err string) {
-	const e = " func GetObjectFromModule"
+func (m Module) GetObject(object_name string) (o *Object, err string) {
+	const e = " . GetObject"
 
 	if object_name == "" {
 		return nil, "nombre no puede estar vació" + e
 	}
 
-	for _, o := range m.Objects {
+	for _, o := range m.objects {
 		// d.Log("BUSCANDO OBJETO:", o.ObjectName)
 		if o.ObjectName == object_name {
 			return o, ""
 		}
 	}
 
-	return nil, object_name + " no encontrado" + e
-}
-
-// actualizar este objeto como en uso actualmente en el modulo
-// func (o *Object) SetActualObject() (err string) {
-// 	return o.Module.setActualModuleObject(o.ObjectName)
-// }
-
-// actualizar objeto en uso actualmente en el modulo
-func (m *Module) setActualModuleObject(object_name string) (err string) {
-
-	if m.object_actual != nil && m.object_actual.ObjectName == object_name {
-		return
-	}
-
-	m.object_actual, err = m.GetObjectFromModule(object_name)
-	return
+	return nil, "objeto:" + object_name + ", no pertenece al modulo:" + m.ModuleName + e
 }
 
 // obtener objeto en uso actualmente en el modulo
@@ -100,7 +87,7 @@ func (m Module) ModuleSupports(area string) bool {
 
 func (m Module) ResetFrontendStateObjects() {
 
-	for _, o := range m.Objects {
+	for _, o := range m.objects {
 		// m.Log("info reset Object:", o.ObjectName)
 		if o.FrontHandler.ResetFrontendObjectStateAdapter != nil {
 			// m.Log("ok ResetFrontendObjectState:", o.ObjectName)

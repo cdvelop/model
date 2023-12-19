@@ -1,15 +1,8 @@
 package model
 
-import "strings"
-
-func (o Object) GetRepresentativeTextField(data_element map[string]string) (values string) {
-	for _, keyNameModel := range o.PrincipalFieldsName {
-		if valueFound, ok := data_element[keyNameModel]; ok {
-			values += valueFound + ` `
-		}
-	}
-	values = strings.TrimSpace(values)
-	return
+// actualizar objeto en uso actualmente en el modulo
+func (o *Object) SetActualObject() {
+	o.Module.object_actual = o
 }
 
 func (o Object) Columns() (columns []string) {
