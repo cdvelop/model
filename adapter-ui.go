@@ -14,7 +14,7 @@ type FrontendHandler struct {
 
 	ResetFrontendObjectStateAdapter
 
-	NotifyFormComplete
+	FormNotify
 }
 
 type AfterCreate interface {
@@ -58,6 +58,7 @@ type ItemViewAdapter interface {
 	BuildItemsView(all_data ...map[string]string) (html string)
 }
 
-type NotifyFormComplete interface {
+type FormNotify interface {
 	NotifyFormIsOK()
+	NotifyFormERR()
 }

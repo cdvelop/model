@@ -9,6 +9,8 @@ type Module struct {
 	IconID string
 	//interfaz usuario modulo
 	UI
+	// ej: keyboard,focus
+	FrontendModuleHandlers
 	//areas soportadas por el modulo ej: 'a','t','x'
 	Areas map[string]string
 	// objetos o componentes que contiene el modulo ej: patient,user,datalist,search....

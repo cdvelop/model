@@ -15,6 +15,8 @@ type Object struct {
 
 	FrontHandler FrontendHandler
 
+	KeyboardHandlerObject
+
 	PrinterHandler
 
 	FormData map[string]string // data temporal formulario

@@ -1,41 +1,40 @@
 package model
 
-// setear valores del form data map del objeto y el estado de los inputs
-func (o *Object) ResetFormDataMapValuesAndInputs(form_jsValue any, reset_input_view bool) (err string) {
-	// o.Log("ok form data:", o.ObjectName, o.FormData)
-
+func (o *Object) DeleteFormData() {
 	if o.FormData != nil {
 		for _, field := range o.Fields {
 
 			if _, exist := o.FormData[field.Name]; exist {
 
 				if !field.NotClearValueOnFormReset {
-
 					// seteamos el valor a ""
 					o.FormData[field.Name] = ""
-
-					if reset_input_view {
-
-						if field.Input != nil {
-							// o.Log("ok reset", field.Name, field.InputName)
-							if field.Input.ResetParameters != nil {
-
-								field.Input.ResetParameters.Params["form"] = form_jsValue
-
-								field.Input.ResetParameters.Params["field_name"] = field.Name
-
-								_, err := field.Input.CallWithEnableAndQueryParams(o)
-								if err != "" {
-									o.Log("ResetFormDataMapValuesAndInputs", field.Name, "input:", field.Input.InputName, "error:", err)
-								}
-
-							}
-						}
-
-					}
 				}
 			}
 		}
+	}
+}
+
+// resetear la vista de los inputs del formulario
+func (o *Object) ResetInputsViewForm(form_jsValue any) (err string) {
+	// o.Log("ok form data:", o.ObjectName, o.FormData)
+
+	for _, field := range o.RenderFields() {
+		// o.Log("NOMBRE CAMPO exist:", field.Name)
+
+		if field.Input != nil && field.Input.ResetParameters != nil {
+			// o.Log("ok reset", field.Name, field.InputName)
+
+			field.Input.ResetParameters.Params["form"] = form_jsValue
+
+			field.Input.ResetParameters.Params["field_name"] = field.Name
+
+			_, err := field.Input.CallWithEnableAndQueryParams(o)
+			if err != "" {
+				o.Log("ResetInputsViewForm", field.Name, "input:", field.Input.InputName, "error:", err)
+			}
+		}
+
 	}
 
 	return

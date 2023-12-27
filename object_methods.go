@@ -69,7 +69,7 @@ func (o Object) FilterRemoveFields(namesToRemove ...string) (fiels_out []Field) 
 }
 
 func (o Object) GetID() (id, err string) {
-	const e = " func GetID"
+	const e = ". GetID"
 
 	err = o.FormCheck()
 	if err != "" {
@@ -85,7 +85,7 @@ func (o Object) GetID() (id, err string) {
 }
 
 func (o Object) FormCheck() (err string) {
-	const e = " func FormCheck"
+	const e = ". FormCheck"
 
 	if o.FormData == nil {
 		return "formulario del objeto:" + o.ObjectName + " no definido (nil)" + e

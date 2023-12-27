@@ -10,7 +10,7 @@ func (o Object) ClickMenuModule() (err string) {
 
 // si no se proporciona id_param se buscara en el formulario actual del objeto
 func (o Object) ClickingID(id_param ...string) (err string) {
-	const e = " func ClickingID"
+	const e = ". ClickingID"
 	var id string
 
 	for _, v := range id_param {
@@ -18,11 +18,7 @@ func (o Object) ClickingID(id_param ...string) (err string) {
 	}
 
 	if id == "" { // no se proporciono id lo buscamos en el formulario
-
-		id, err = o.GetID()
-		if err != "" {
-			return err + e
-		}
+		id, _ = o.GetID() // este función retorna error pero podemos hacer click en los elementos sin id
 	}
 
 	module_html, err := o.CheckModuleHtml()
@@ -70,9 +66,28 @@ func (o Object) CheckModuleHtml() (module_html any, err string) {
 		return nil, "error objeto " + o.ObjectName + " no tiene controlador ObjectViewHandler"
 	}
 
-	module_html, err = o.GetHtmlModule(o.ModuleName)
+	module_html, err = o.GetHtmlModuleContent()
 	if err != "" {
 		return nil, err
+	}
+
+	return
+}
+
+// select_items ej: div#user, `button[name="login"]`
+func (o Object) GetHtmlModuleContent(select_items ...string) (jsValue any, err string) {
+	var selected string
+
+	for _, item := range select_items {
+		selected += " " + item
+	}
+
+	jsValue, err = o.SelectContent(SelectDomOptions{
+		QuerySelector: o.QuerySelectorModule(o.ModuleName) + selected,
+	})
+
+	if err != "" {
+		err = "GetHtmlModuleContent " + err
 	}
 
 	return

@@ -5,10 +5,11 @@ type ThemeAdapter interface {
 	// <svg aria-hidden="true" focusable="false" class="fa-primary"><use xlink:href="#` + icon_id + `" /></svg>
 	// <span class="link-text">` + title + `</span></a></li>
 	MenuButtonTemplate(module_name, index, icon_id, title string) string
-	MenuClassName() string // ej: .menu-container
-	MenuItemClass() string // ej: navbar-item
-
-	ModuleClassName() string //ej: slider_panel
+	MenuClassName() string     // ej: .menu-container
+	MenuItemClass() string     // ej: navbar-item
+	RouterJSFuncName() string  //ej:"menuRouter"
+	ModuleClassName() string   //ej: slider_panel
+	MenuClassSelected() string //ej: hash-selected
 
 	ModuleTemplate(*TemplateModuleConfig) string
 

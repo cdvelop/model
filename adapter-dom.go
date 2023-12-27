@@ -7,6 +7,7 @@ type DomAdapter interface {
 	InsertBeforeEnd(querySelector, html_content string) (err string)
 	// querySelector ej: "a[name='xxx']"
 	ElementClicking(querySelector string) (err string)
+	ElementFocus(querySelector string) (err string)
 
 	SelectContent(SelectDomOptions) (jsValue any, err string)
 

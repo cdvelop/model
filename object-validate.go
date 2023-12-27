@@ -63,10 +63,14 @@ func (o Object) ValidateData(its_new, its_update_or_delete bool, all_data ...map
 func (o Object) verificationAllFields(data map[string]string) (wrongFields []string) {
 	for _, field := range o.Fields {
 
+		if field.Input == nil {
+			o.Log("verificationAllFields campo", field.Name, "input nil en objeto", o.ObjectName)
+			continue
+		}
+
 		if !field.SkipCompletionAllowed { // campo requerido
 			// total_required++
 			if dataIn, exists := data[field.Name]; exists {
-
 				err := field.Input.ValidateField(dataIn, field.SkipCompletionAllowed)
 				if err != "" {
 					wrongFields = append(wrongFields, errorMessage(dataIn, &field, err))

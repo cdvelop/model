@@ -31,6 +31,8 @@ type MainHandler struct {
 	FileApi
 	FileDiskRW
 
+	DevicePeripherals
+
 	MessageAdapter
 	Logger
 }
