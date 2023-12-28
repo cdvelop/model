@@ -12,11 +12,16 @@ type TimeAdapter interface {
 	SetDate(new_date string)
 }
 
+type DateFormat struct {
+	LeftDay     bool //true ej: "30-12-2001", default false: "2006-01-02"
+	WithSeconds bool //ej: 2006-01-02, 15:04, WithSeconds true = 15:04:05
+}
+
 type TimeNow interface {
-	//ej: 2006-01-02
-	DateToDay() string
-	//ej: 2006-01-02, 15:04 with_seconds true = 15:04:05
-	DateToDayHour(with_seconds ...bool) (date, hour string)
+	//ej true: "30-12-2001", default false: "2006-01-02"
+	DateToDay(df *DateFormat) string
+	//ej default: "2006-01-02", "15:04" WithSeconds true = 15:04:05
+	DateToDayHour(df *DateFormat) (date, hour string)
 }
 
 type TimeWeek interface {
