@@ -23,7 +23,8 @@ type ThemeAdapter interface {
 }
 
 type TemplateModuleConfig struct {
-	Module *Module
+	RenderAllSpaceCentered bool // ej para login
+	Module                 *Module
 	// ej:	`<div class="target-module">
 	// 	<select name="select">
 	// 		<option value="value1">Value 1</option>
@@ -31,8 +32,19 @@ type TemplateModuleConfig struct {
 	// 	</select>
 	// </div>`
 	HeaderInputTarget string
-	Form              *Object
-	AsideList         ContainerViewAdapter
-	ButtonLogin       bool
-	ButtonPrint       bool
+
+	Form        *Object
+	FormButtons []*ButtonForm
+
+	AsideList ContainerViewAdapter
+}
+
+type ButtonForm struct {
+	ModuleName string // ej:c.Module
+	ObjectName string // ej: c.Form.ObjectName
+	ButtonName string // ej: btn_printer
+	Title      string // ej: Imprimir
+	IconID     string // ej: icon-printer
+	OnclickFun string // ej: printForm(this)
+	Disabled   bool   // activado por defecto
 }
