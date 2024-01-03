@@ -64,7 +64,7 @@ func (o Object) verificationAllFields(data map[string]string) (wrongFields []str
 	for _, field := range o.Fields {
 
 		if field.Input == nil {
-			o.Log("verificationAllFields campo", field.Name, "input nil en objeto", o.ObjectName)
+			// o.Log("verificationAllFields campo", field.Name, "input nil en objeto", o.ObjectName)
 			continue
 		}
 
@@ -105,10 +105,14 @@ func (o Object) verificationUpdateFields(data map[string]string) (wrongFields []
 
 		if field_found, exist := o.FieldExist(field_name); exist { // existe
 
+			if field_found.Input == nil {
+				// o.Log("verificationUpdateFields campo", field_found.Name, "input nil en objeto", o.ObjectName)
+				continue
+			}
+
 			if !field_found.Unique {
 
 				if !field_found.SkipCompletionAllowed || value != "" { // si es campo requerido se valida o distinto de vació
-
 					err := field_found.Input.ValidateField(value, field_found.SkipCompletionAllowed)
 					if err != "" {
 						wrongFields = append(wrongFields, "dato: "+value+" en: "+field_found.Legend+" "+err)
