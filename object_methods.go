@@ -98,11 +98,11 @@ func (o Object) FormCheck() (err string) {
 	return
 }
 
-func (o Object) FieldExist(field_name string) (Field, bool) {
+func (o Object) FieldExist(field_name string) (*Field, bool) {
 	for _, field := range o.Fields {
 		if field.Name == field_name {
-			return field, true
+			return &field, true
 		}
 	}
-	return Field{}, false
+	return nil, false
 }

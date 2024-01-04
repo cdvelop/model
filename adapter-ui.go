@@ -60,5 +60,5 @@ type ItemViewAdapter interface {
 
 type FormNotify interface {
 	NotifyFormIsOK()
-	NotifyFormERR()
+	NotifyFormERR(err string)
 }

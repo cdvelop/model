@@ -27,6 +27,7 @@ type ReadResults struct {
 	ResultsAny    []map[string]any
 }
 
+// backup_required ej si se esta en frontend se envía también al backend la solicitud
 type DataBaseAdapter interface {
 	IdHandler
 	RunOnClientDB() bool //verdadero corren en el cliente ej browser. por defecto falso corre en el servidor
@@ -36,8 +37,8 @@ type DataBaseAdapter interface {
 	ReadSyncDataDB(p ReadParams, data ...map[string]string) (result []map[string]string, err string)
 	ReadAsyncDataDB(p ReadParams, callback func(r *ReadResults, err string))
 
-	UpdateObjectsInDB(table_name string, data ...map[string]string) (err string)
-	DeleteObjectsInDB(table_name string, data ...map[string]string) (err string)
+	UpdateObjectsInDB(table_name string, backup_required bool, data ...map[string]string) (err string)
+	DeleteObjectsInDB(table_name string, backup_required bool, data ...map[string]string) (err string)
 
 	CreateTablesInDB(objects []*Object, result func(err string))
 
