@@ -17,8 +17,6 @@ type Object struct {
 
 	KeyboardHandlerObject
 
-	PrinterHandler
-
 	FormData map[string]string // data temporal formulario
 
 	AlternativeValidateAdapter
