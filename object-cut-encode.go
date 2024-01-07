@@ -7,6 +7,7 @@ func (o Object) DataEncode(all_data ...map[string]string) (out []CutData, err st
 		return
 	}
 
+	// fmt.Println("OBJETO:", o.ObjectName)
 	for _, data := range all_data {
 
 		// fmt.Println("ENTRO ACA:", data)
