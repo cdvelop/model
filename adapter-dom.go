@@ -8,6 +8,7 @@ type DomAdapter interface {
 	// querySelector ej: "a[name='xxx']"
 	ElementClicking(querySelector string) (err string)
 	ElementFocus(querySelector string) (err string)
+	ElementsDelete(object_name string, on_server_too bool, objects_ids ...map[string]string) (err string)
 
 	SelectContent(SelectDomOptions) (jsValue any, err string)
 

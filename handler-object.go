@@ -1,14 +1,22 @@
 package model
 
-type ObjectHandlerAdapter interface {
-	ObjectActual() *Object
-	SetActualObject(object_name string) (err string)
-}
-
 type ObjectsHandlerAdapter interface {
 	// optional object_name or table_name ej: file.user,"" or "","user"
 	GetObjectBY(object_name, table_name string) (o *Object, err string)
 	GetAllObjects(only_type_db_table bool) (objects []*Object)
+}
+
+// optional object_name or table_name ej: file.user,"" or "","user"
+func (h MainHandler) GetObjectBY(object_name, table_name string) (obj *Object, err string) {
+
+	for _, o := range h.GetAllObjects(false) {
+		if object_name != "" && o.ObjectName == object_name || table_name != "" && o.Table == table_name {
+			return o, ""
+		}
+	}
+
+	return nil, "GetObjectBY: " + object_name + table_name + " no encontrado."
+
 }
 
 // only_type_db_table de tipo tabla en base de datos ej: user,patient
@@ -40,17 +48,4 @@ func (h *MainHandler) addDbTableObjects() {
 			}
 		}
 	}
-}
-
-// optional object_name or table_name ej: file.user,"" or "","user"
-func (h MainHandler) GetObjectBY(object_name, table_name string) (obj *Object, err string) {
-
-	for _, o := range h.GetAllObjects(false) {
-		if object_name != "" && o.ObjectName == object_name || table_name != "" && o.Table == table_name {
-			return o, ""
-		}
-	}
-
-	return nil, "GetObjectBY: " + object_name + table_name + " no encontrado."
-
 }

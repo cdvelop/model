@@ -16,8 +16,6 @@ type MainHandler struct {
 	objects    []*Object // todos los objetos agregados al sistema
 	objects_db []*Object // todos los objetos de tipo tabla en base de datos
 
-	ObjectHandlerAdapter
-
 	ThemeAdapter
 	DataBaseAdapter
 	BackupHandlerAdapter
