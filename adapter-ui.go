@@ -10,7 +10,7 @@ type FrontendHandler struct {
 
 	NotifyBootData
 
-	ObjectViewHandler
+	ViewHandlerObject
 
 	ResetFrontendObjectStateAdapter
 
@@ -42,8 +42,8 @@ type NotifyBootData interface {
 	NotifyBootDataIsLoaded()
 }
 
-type ObjectViewHandler interface {
-	NameViewAdapter() string
+type ViewHandlerObject interface {
+	ViewHandlerName() string
 	ContainerViewAdapter
 	ItemViewAdapter
 	ResetViewHandlerObjectAdapter

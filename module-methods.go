@@ -38,11 +38,15 @@ func (m Module) GetObject(object_name string) (o *Object, err string) {
 	return nil, "objeto:" + object_name + ", no pertenece al modulo:" + m.ModuleName + e
 }
 
+func (m *Module) SetActualObject(o *Object) {
+	m.object_actual = o
+}
+
 // obtener objeto en uso actualmente en el modulo
-func (m *Module) GetActualModuleObject() (o *Object, err string) {
+func (m *Module) GetActualObject() (o *Object, err string) {
 
 	if m.object_actual == nil {
-		return nil, "objecto actual no definido func GetActualModuleObject"
+		return nil, "objecto actual aun no definido en el modulo" + m.ModuleName + " func GetActualObject"
 	}
 
 	return m.object_actual, ""
@@ -94,9 +98,9 @@ func (m Module) ResetFrontendStateObjects() {
 			m.Log(o.FrontHandler.ResetFrontendObjectState())
 		}
 
-		if o.FrontHandler.ObjectViewHandler != nil {
+		if o.FrontHandler.ViewHandlerObject != nil {
 			// m.Log("ResetViewHandlerObject:", o.ObjectName)
-			m.Log(o.FrontHandler.ObjectViewHandler.ResetViewHandlerObject())
+			m.Log(o.FrontHandler.ViewHandlerObject.ResetViewHandlerObject())
 		}
 	}
 }

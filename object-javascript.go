@@ -26,7 +26,7 @@ func (o Object) ClickingID(id_param ...string) (err string) {
 		return err + e
 	}
 
-	_, err = o.CallFunction(o.FrontHandler.NameViewAdapter()+"ObjectClicking", module_html, id)
+	_, err = o.CallFunction(o.FrontHandler.ViewHandlerName()+"ObjectClicking", module_html, id)
 	if err != "" {
 		return err + e
 	}
@@ -38,7 +38,7 @@ func (o Object) CountViewElements() (total int, err string) {
 	const t = "CountViewElements "
 
 	fn := CallJsOptions{
-		NameJsFunc:         o.FrontHandler.NameViewAdapter() + "ObjectCount",
+		NameJsFunc:         o.FrontHandler.ViewHandlerName() + "ObjectCount",
 		Enable:             false,
 		NotSendQueryObject: false,
 		Params:             map[string]any{},
@@ -62,8 +62,8 @@ func (o Object) CountViewElements() (total int, err string) {
 
 func (o Object) CheckModuleHtml() (module_html any, err string) {
 
-	if o.FrontHandler.ObjectViewHandler == nil {
-		return nil, "error objeto " + o.ObjectName + " no tiene controlador ObjectViewHandler"
+	if o.FrontHandler.ViewHandlerObject == nil {
+		return nil, "error objeto " + o.ObjectName + " no tiene controlador ViewHandlerObject"
 	}
 
 	module_html, err = o.GetHtmlModuleContent()
