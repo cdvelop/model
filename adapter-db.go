@@ -34,8 +34,8 @@ type DataBaseAdapter interface {
 	// items support in server db: []map[string]string, map[string]string
 	CreateObjectsInDB(table_name string, on_server_too bool, items any) (err string)
 
-	ReadSyncDataDB(p ReadParams, data ...map[string]string) (result []map[string]string, err string)
-	ReadAsyncDataDB(p ReadParams, callback func(r *ReadResults, err string))
+	ReadSyncDataDB(p *ReadParams, data ...map[string]string) (result []map[string]string, err string)
+	ReadAsyncDataDB(p *ReadParams, callback func(r *ReadResults, err string))
 
 	UpdateObjectsInDB(table_name string, on_server_too bool, data ...map[string]string) (err string)
 	DeleteObjectsInDB(table_name string, on_server_too bool, data ...map[string]string) (err string)

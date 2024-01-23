@@ -6,7 +6,7 @@ type FrontendHandler struct {
 	AfterUpdate
 	AfterDelete
 
-	AfterClicked
+	AfterClickNotify
 
 	NotifyBootData
 
@@ -33,9 +33,9 @@ type AfterDelete interface {
 	SetObjectInDomAfterDelete(data ...map[string]string) (err string)
 }
 
-type AfterClicked interface {
+type AfterClickNotify interface {
 	// data del objeto que fue cliqueado por el usuario
-	UserHasClickedObject()
+	NotifyUserHasClickedObject()
 }
 
 type NotifyBootData interface {
