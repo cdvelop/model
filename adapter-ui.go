@@ -42,13 +42,6 @@ type NotifyBootData interface {
 	NotifyBootDataIsLoaded()
 }
 
-type ViewHandlerObject interface {
-	ViewHandlerName() string
-	ContainerViewAdapter
-	ItemViewAdapter
-	ResetViewHandlerObjectAdapter
-}
-
 // todo el contenido html por defecto del objeto
 type ContainerViewAdapter interface {
 	BuildContainerView(id, field_name string, allow_skip_completed bool) string
