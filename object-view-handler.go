@@ -5,6 +5,7 @@ type ViewHandlerObject interface {
 	ContainerViewAdapter
 	ItemViewAdapter
 	ResetViewHandlerObjectAdapter
+	NotifyStatusChangeAfterClicking()
 }
 
 func (o *Object) AddViewHandlerObject(viewHandlerObject any) {
