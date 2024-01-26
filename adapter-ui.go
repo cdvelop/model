@@ -9,6 +9,7 @@ type FrontendHandler struct {
 	AfterClickNotify
 
 	NotifyBootData
+	NotifyFileDelete
 
 	ViewHandlerObject
 
@@ -36,6 +37,10 @@ type AfterDelete interface {
 type AfterClickNotify interface {
 	// data del objeto que fue cliqueado por el usuario
 	NotifyUserHasClickedObject()
+}
+
+type NotifyFileDelete interface {
+	NotifyFileDeletion()
 }
 
 type NotifyBootData interface {
