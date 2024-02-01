@@ -17,12 +17,13 @@ type Module struct {
 	objects []*Object
 	// objeto en uso actualmente en el modulo
 	object_actual *Object
-	// tipo de entradas usadas en el modulo
-	Inputs []*Input
 
 	*MainHandler
 }
 
 type UI interface {
 	UserInterface(u *User) string
+}
+
+type ModuleFrontend interface {
 }

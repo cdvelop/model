@@ -5,14 +5,16 @@ const INPUT_PATTERN = `input\.(\w+)\([^)]*\)`
 type Input struct {
 	InputName string
 
-	Minimum int
-	Maximum int
-
 	Tag
 	ItemViewAdapter
 	Validate
 
-	*ResetParameters
+	ResetParameters *struct {
+		ResetJsFuncName    string         // nombre la la función js a llamar para reset
+		Enable             bool           //parámetro estado por defecto a enviar
+		NotSendQueryObject bool           //no envía querySelector Objeto por defecto siempre se envía
+		Params             map[string]any // parámetros adicionales
+	}
 
 	TestData
 }

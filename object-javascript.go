@@ -26,7 +26,13 @@ func (o Object) ClickingID(id_param ...string) (err string) {
 		return err + e
 	}
 
-	_, err = o.CallFunction(o.FrontHandler.ViewHandlerName()+"ObjectClicking", module_html, id)
+	_, err = o.CallFunction(o.FrontHandler.ViewHandlerName()+"ObjectClicking", struct {
+		Params       map[string]any
+		ResultInt    bool
+		ResultString bool
+	}{
+		Params: map[string]any{"module": module_html, "id": id},
+	})
 	if err != "" {
 		return err + e
 	}
@@ -37,16 +43,13 @@ func (o Object) ClickingID(id_param ...string) (err string) {
 func (o Object) CountViewElements() (total int, err string) {
 	const t = "CountViewElements "
 
-	fn := CallJsOptions{
-		NameJsFunc:         o.FrontHandler.ViewHandlerName() + "ObjectCount",
-		Enable:             false,
-		NotSendQueryObject: false,
-		Params:             map[string]any{},
-		ResultInt:          true,
-		ResultString:       false,
-	}
-
-	js_value, err := fn.CallWithEnableAndQueryParams(&o)
+	js_value, err := o.CallFunction(o.FrontHandler.ViewHandlerName()+"ObjectCount", struct {
+		Params       map[string]any
+		ResultInt    bool
+		ResultString bool
+	}{
+		ResultInt: true,
+	})
 	if err != "" {
 		return 0, t + err
 	}
@@ -54,7 +57,7 @@ func (o Object) CountViewElements() (total int, err string) {
 	var ok bool
 	total, ok = js_value.(int)
 	if !ok {
-		return 0, t + "valor retornado en la función " + fn.NameJsFunc + " no es de tipo int"
+		return 0, t + "valor retornado en la función " + o.FrontHandler.ViewHandlerName() + "ObjectCount" + " no es de tipo int"
 	}
 
 	return
@@ -82,7 +85,12 @@ func (o Object) GetHtmlModuleContent(select_items ...string) (jsValue any, err s
 		selected += " " + item
 	}
 
-	jsValue, err = o.SelectContent(SelectDomOptions{
+	jsValue, err = o.SelectContent(struct {
+		QuerySelector string
+		GetContent    string
+		SetAfter      bool
+		StringReturn  bool
+	}{
 		QuerySelector: o.QuerySelectorModule(o.ModuleName) + selected,
 	})
 

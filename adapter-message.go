@@ -1,5 +1,5 @@
 package model
 
 type MessageAdapter interface {
-	UserMessage(message ...any) interface{}
+	UserMessage(message ...any)
 }

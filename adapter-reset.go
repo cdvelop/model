@@ -7,7 +7,3 @@ type ResetFrontendObjectStateAdapter interface {
 type ResetViewHandlerObjectAdapter interface {
 	ResetViewHandlerObject() (err string)
 }
-
-type ResetParameters struct {
-	CallJsOptions
-}

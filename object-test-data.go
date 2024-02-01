@@ -27,7 +27,7 @@ func (o Object) TestData(required_objects int, skip_id, wrong_data bool) (out []
 		}
 
 		if required_objects > len(obtained_data) {
-			return nil, "TestData error solicitud data fuera de rango " + f.Name + " tipo " + f.InputName + " solo contiene:" + strconv.Itoa(len(obtained_data))
+			return nil, "TestData error solicitud data fuera de rango " + f.Name + " tipo " + f.Input.InputName + " solo contiene:" + strconv.Itoa(len(obtained_data))
 		}
 
 		for i := 0; i < required_objects; i++ {

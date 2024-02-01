@@ -29,7 +29,20 @@ func (o *Object) ResetInputsViewForm(form_jsValue any) (err string) {
 
 			field.Input.ResetParameters.Params["field_name"] = field.Name
 
-			_, err := field.Input.CallWithEnableAndQueryParams(o)
+			// Añadir los parámetros específicos de la función
+			field.Input.ResetParameters.Params["enable"] = field.Input.ResetParameters.Enable
+
+			if !field.Input.ResetParameters.NotSendQueryObject {
+				field.Input.ResetParameters.Params["query"] = o.QuerySelectorObject(o.ModuleName, o.ObjectName)
+			}
+
+			_, err := o.CallFunction(field.Input.ResetParameters.ResetJsFuncName, struct {
+				Params       map[string]any
+				ResultInt    bool
+				ResultString bool
+			}{
+				Params: field.Input.ResetParameters.Params,
+			})
 			if err != "" {
 				o.Log("ResetInputsViewForm", field.Name, "input:", field.Input.InputName, "error:", err)
 			}
